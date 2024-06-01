@@ -377,44 +377,45 @@
                 </div>
                 <div class="container-fluid">
                     <h2 class="text-center all-tittles">Listado de Miembros</h2>
-                    <div id="tablaMiembros" class="table-responsive">
-                        <div class="div-table" style="margin:0 !important;">
-                            <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
-                                <div class="div-table-cell" style="width: 6%;">Carnet</div>
-                                <div class="div-table-cell" style="width: 15%;">Nombres</div>
-                                <div class="div-table-cell" style="width: 15%;">Apellidos</div>
-                                <div class="div-table-cell" style="width: 15%;">Telefono</div>
-                                <div class="div-table-cell" style="width: 15%;">Correo</div>
-                                <div class="div-table-cell" style="width: 10%;">Membresia</div>
-                                <div class="div-table-cell" style="width: 10%;">Vigencia</div>
-                                <div class="div-table-cell" style="width: 7%;">Actualizar</div>
-                                <div class="div-table-cell" style="width: 7%;">Eliminar</div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="table-responsive">
-                        <div class="div-table" style="margin:0 !important;">
-                            @foreach ($miembros as $miembro)
-                            <div class="div-table-row div-table-row-list">
-                                <div class="div-table-cell" style="width: 6%;">{{$miembro->CARNET_MIEMBRO}}</div>
-                                <div class="div-table-cell" style="width: 15%;">{{$miembro->NOMBRE}}</div>
-                                <div class="div-table-cell" style="width: 15%;">{{$miembro->APELLIDO}}</div>
-                                <div class="div-table-cell" style="width: 15%;">{{$miembro->TELEFONO}}</div>
-                                <div class="div-table-cell" style="width: 15%;">{{$miembro->CORREO}}</div>
-                                <div class="div-table-cell" style="width: 10%;">{{$miembro->FECHA_MEMBRESIA}}</div>
-                                <div class="div-table-cell" style="width: 10%;">{{$miembro->VIGENCIA}}</div>
-                                <div class="div-table-cell" style="width: 7%;"><button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button></div>
-                                <div class="div-table-cell" style="width: 7%;">
-                                    <form action="{{ url('miembro/home/' . $miembro->user_id) }}" method="post" id="deleteFormM{{ $miembro->user_id }}">
-                                        @csrf
-                                        {{ method_field('DELETE') }}
-                                        <button onclick="confirmDeleteM(event, {{ $miembro->user_id }})" class=" btn btn-danger" type="submit"><i class="zmdi zmdi-delete"></i></button>
-                                    </form>
-                                </div>
-                            </div>    
-                            @endforeach
-                            
-                        </div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Carnet</th>
+                                    <th >Nombres</th>
+                                    <th >Apellidos</th>
+                                    <th >Telefono</th>
+                                    <th >Correo</th>
+                                    <th >Membresia</th>
+                                    <th >Vigencia</th>
+                                    <th >Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($miembros as $miembro)
+                                <tr>
+                                    <td>{{$miembro->CARNET_MIEMBRO}}</td>
+                                    <td>{{$miembro->NOMBRE}}</td>
+                                    <td>{{$miembro->APELLIDO}}</td>
+                                    <td>{{$miembro->TELEFONO}}</td>
+                                    <td>{{$miembro->CORREO}}</td>
+                                    <td>{{$miembro->FECHA_MEMBRESIA}}</td>
+                                    <td>{{$miembro->VIGENCIA}}</td>
+                                    <td>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <a href="{{ url('miembro/home/edit/' . $miembro->user_id) }}"
+                                                class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
+                                            <form action="{{ url('miembro/home/' . $miembro->user_id) }}" method="post" id="deleteFormM{{ $miembro->user_id }}">
+                                                @csrf
+                                                {{ method_field('DELETE') }}
+                                                <button onclick="confirmDeleteM(event, {{ $miembro->user_id }})" class=" btn btn-danger" type="submit"><i class="zmdi zmdi-delete"></i></button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     
                 </div>
@@ -592,45 +593,42 @@
                     <h2 class="text-center all-tittles" style="clear: both; margin: 25px 0;">Listado de Profesores
                     </h2>
                     <div class="table-responsive">
-                        <div class="div-table" style="margin:0 !important;">
-                            <div class="div-table-row div-table-row-list"
-                                style="background-color:#DFF0D8; font-weight:bold;">
-                                <div class="div-table-cell" style="width: 6%;">Carnet</div>
-                                <div class="div-table-cell" style="width: 15%;">Nombres</div>
-                                <div class="div-table-cell" style="width: 15%;">Apellidos</div>
-                                <div class="div-table-cell" style="width: 15%;">DUI</div>
-                                <div class="div-table-cell" style="width: 15%;">Correo</div>
-                                <div class="div-table-cell" style="width: 12%;">Teléfono</div>
-                                <div class="div-table-cell" style="width: 9%;">Actualizar</div>
-                                <div class="div-table-cell" style="width: 9%;">Eliminar</div>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <div class="div-table" style="margin:0 !important;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Carnet</th>
+                                    <th >Nombres</th>
+                                    <th >Apellidos</th>
+                                    <th >DUI</th>
+                                    <th >Correo</th>
+                                    <th >Teléfono</th>
+                                    <th >Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 @foreach ($profesores as $profesor)
-                                    <div class="div-table-row div-table-row-list">
-                                        <div class="div-table-cell" style="width: 6%;">{{ $profesor->CARNET_PROFESOR }}</div>
-                                        <div class="div-table-cell" style="width: 15%;">{{ $profesor->NOMBRE }}</div>
-                                        <div class="div-table-cell" style="width: 15%;">{{ $profesor->APELLIDO }}</div>
-                                        <div class="div-table-cell" style="width: 15%;">{{ $profesor->DUI }}</div>
-                                        <div class="div-table-cell" style="width: 15%;">{{ $profesor->CORREO }}</div>
-                                        <div class="div-table-cell" style="width: 12%;">{{ $profesor->TELEFONO }}</div>
-                                        <div class="div-table-cell" style="width: 9%;">
-                                            <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                                        </div>
-                                        <div class="div-table-cell" style="width: 9%;">
+                                <tr>
+                                    <td>{{ $profesor->CARNET_PROFESOR }}</td>
+                                    <td>{{ $profesor->NOMBRE }}</td>
+                                    <td>{{ $profesor->APELLIDO }}</td>
+                                    <td>{{ $profesor->DUI }}</td>
+                                    <td>{{ $profesor->CORREO }}</td>
+                                    <td>{{ $profesor->TELEFONO }}</td>
+                                    <td>
+                                        <div style="display: flex; justify-content: space-between;">
+                                            <a href="{{ url('profesor/home/edit/' . $profesor->user_id) }}"
+                                                class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
                                             <form action="{{ url('profesor/home/' . $profesor->user_id) }}" method="post" id="deleteFormP{{ $profesor->user_id }}">
                                                 @csrf
                                                 {{ method_field('DELETE') }}
                                                 <button onclick="confirmDeleteP(event, {{ $profesor->user_id }})" class=" btn btn-danger" type="submit"><i class="zmdi zmdi-delete"></i></button>
                                             </form>
                                         </div>
-                                            
-                                    </div>
+                                    </td>
+                                </tr>
                                 @endforeach
-                            </div>
-                        </div>
-                       
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -766,48 +764,48 @@
                         </div>
                     </div>
                 <h2 class="text-center all-tittles">Lista de Bibliotecarios</h2>
-                <div class="div-table">
-                    <div class="div-table-row div-table-head">
-                        <div class="div-table-cell">ID</div>
-                        <div class="div-table-cell">Nombres</div>
-                        <div class="div-table-cell">Apellidos</div>
-                        <div class="div-table-cell">Username</div>
-                        <div class="div-table-cell">Estado</div>
-                        <div class="div-table-cell">Cambiar E.</div>
-                        <div class="div-table-cell">Actualizar</div>
-                        <div class="div-table-cell">Eliminar</div>
-                    </div>
-                    @foreach ($bibliotecarios as $bibliotecario)
-                    <div class="div-table-row">
-                        <div class="div-table-cell">{{$bibliotecario->ID_BIBLIOTECARIO}}</div>
-                        <div class="div-table-cell">{{$bibliotecario->NOMBRE}}</div>
-                        <div class="div-table-cell">{{$bibliotecario->APELLIDO}}</div>
-                        <div class="div-table-cell">{{$bibliotecario->USER_NAME}}</div>
-                        <div class="div-table-cell">{{$bibliotecario->activo ? 'Activo':'Inactivo'}}</div>
-                        <div class="div-table-cell">
-                        <form method="POST" action="{{ route('bibliotecario/home/', $bibliotecario->user_id) }}">
-                            @csrf
-                            
-                                <button type="submit" class="btn btn-info tooltips-general" data-toggle="tooltip"
-                                    data-placement="top" title="Cuenta desactivada, pulsa el botón para activarla"><i
-                                        class="zmdi zmdi-swap"></i></button>
-                            </div>
-                        </form>
-                        <div class="div-table-cell">
-                            <button class="btn btn-success"><i class="zmdi zmdi-refresh"></i></button>
-                        </div>
-
-                        <div class="div-table-cell">
-                            <form action="{{ url('bibliotecario/home/' . $bibliotecario->user_id) }}" method="post" id="deleteFormB{{ $bibliotecario->user_id }}">
-                                                @csrf
-                                                {{ method_field('DELETE') }}
-                                                <button onclick="confirmDeleteB(event, {{ $bibliotecario->user_id }})" class=" btn btn-danger" type="submit"><i class="zmdi zmdi-delete"></i></button>
-                                            </form>
-                        </div>
-                    </div>
-                    @endforeach
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Username</th>
+                                <th>Estado</th>
+                                <th style="width: 10%;">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($bibliotecarios as $bibliotecario)
+                            <tr>
+                                <td>{{$bibliotecario->ID_BIBLIOTECARIO}}</td>
+                                <td>{{$bibliotecario->NOMBRE}}</td>
+                                <td>{{$bibliotecario->APELLIDO}}</td>
+                                <td>{{$bibliotecario->USER_NAME}}</td>
+                                <td>{{$bibliotecario->activo ? 'Activo':'Inactivo'}}</td>
+                                <td>
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <form method="POST" action="{{ route('bibliotecario/home/estado/', $bibliotecario->user_id) }}">
+                                            @csrf
+                                            <button type="submit" class="btn btn-secondary" data-toggle="tooltip"
+                                                data-placement="top" title="Cambia el estado"><i
+                                                    class="zmdi zmdi-swap"></i></button>
+                                        </form>
+                                        <a href="{{ url('bibliotecario/home/edit/' . $bibliotecario->ID_BIBLIOTECARIO) }}"
+                                            class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
+                                        <form action="{{ url('bibliotecario/home/' . $bibliotecario->user_id) }}" method="post" id="deleteFormB{{ $bibliotecario->user_id }}">
+                                            @csrf
+                                            {{ method_field('DELETE') }}
+                                            <button onclick="confirmDeleteB(event, {{ $bibliotecario->user_id }})" class=" btn btn-danger" type="submit"><i class="zmdi zmdi-delete"></i></button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </div>
         </div>
     </div>
     <div class="modal fade" tabindex="-1" role="dialog" id="ModalHelp">
