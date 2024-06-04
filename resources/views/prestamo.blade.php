@@ -48,6 +48,7 @@
                 </div>
             </div>
             @foreach ($prestamos as $prestamo)
+            @if($prestamo->devuelto == 1)
             <div class="table-responsive">
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
@@ -75,6 +76,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             @endforeach
 
        @endsection

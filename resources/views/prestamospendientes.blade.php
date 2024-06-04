@@ -28,106 +28,46 @@
             <div class="table-responsive">
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
+                        <div class="div-table-cell" style="width: 2%;">#</div>
+                        <div class="div-table-cell" style="width: 19%;">Nombre de libro</div>
+                        <div class="div-table-cell" style="width: 10%;">Nombre de usuario</div>
+                        <div class="div-table-cell" style="width: 10%;">Devuelto</div>
                         <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
                         <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
                         <div class="div-table-cell" style="width: 8%;">Recibir</div>
+                        <div class="div-table-cell" style="width: 8%;">Editar</div>
                         <div class="div-table-cell" style="width: 8%;">Ver Ficha</div>
                     </div>
                 </div>
             </div>
+            @foreach ($prestamos as $prestamo)
+            @if($prestamo->devuelto == 0)
             <div class="table-responsive">
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
+                        <div class="div-table-cell" style="width: 2%;">{{$prestamo->id}}</div>
+                        <div class="div-table-cell" style="width: 19%;">{{$prestamo->id_ejemplar}}</div>
+                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->carnet_miembro}}</div>
+                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->devuelto}}</div>
+                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_prestamo}}</div>
+                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_devolucion}}</div>
                         <div class="div-table-cell" style="width: 8%;">
                             <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
                         </div>
                         <div class="div-table-cell" style="width: 8%;">
+                            <a href="{{route('prestamoPendiente.edit', $prestamo)}}">
+                            <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
+                        </i></a>
+                        </div>
+                        <div class="div-table-cell" style="width: 8%;">
+                            <a href="{{url('prestamo/'.$prestamo->id)}}">
                             <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="table-responsive">
-                <div class="div-table" style="margin:0 !important;">
-                    <div class="div-table-row div-table-row-list">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
-                        </div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <div class="div-table" style="margin:0 !important;">
-                    <div class="div-table-row div-table-row-list">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
-                        </div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <div class="div-table" style="margin:0 !important;">
-                    <div class="div-table-row div-table-row-list">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
-                        </div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="table-responsive">
-                <div class="div-table" style="margin:0 !important;">
-                    <div class="div-table-row div-table-row-list">
-                        <div class="div-table-cell" style="width: 6%;">#</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Libro</div>
-                        <div class="div-table-cell" style="width: 22%;">Nombre de Usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Tipo</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
-                        </div>
-                        <div class="div-table-cell" style="width: 8%;">
-                            <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endif
+            @endforeach
         </div>
         @endsection

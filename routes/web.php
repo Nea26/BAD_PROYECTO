@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PrestamoController;
+use App\Http\Controllers\PrestamoPendienteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,10 +27,11 @@ Route::get('/prestamo/{prestamo}/editar', [PrestamoController::class, 'edit'])->
 Route::patch('/prestamo/{prestamo}', [PrestamoController::class, 'update'])->name('prestamo.update');
 
 
-
-Route::get('/prestamospendientes.html', function () {
-    return view('prestamospendientes');
-});
+//prestamos pendientes
+Route::get('/prestamospendientes.html', [PrestamoPendienteController::class, 'index'])->name('prestamoPendiente.index');
+Route::get('/prestamo/{prestamo}', [PrestamoPendienteController::class, 'show'])->name('prestamoPendiente.show');
+Route::get('/prestamoPendiente/{prestamo}/editar', [PrestamoPendienteController::class, 'edit'])->name('prestamoPendiente.edit');
+Route::patch('/prestamoPendiente/{prestamo}', [PrestamoPendienteController::class, 'update'])->name('prestamoPendiente.update');
 
 Route::get('/reservaciones.html', function () {
     return view('reservaciones');
