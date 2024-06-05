@@ -59,15 +59,19 @@
                         <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_prestamo}}</div>
                         <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_devolucion}}</div>
                         <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_devuelto}}</div>
-                        <div class="div-table-cell" style="width: 8%;">
+                        <form action="{{route('prestamo.destroy',$prestamo)}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                        <div class="div-table-cell" style="width: 6%;">
                             <button  class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
                         </div>
-                        <div class="div-table-cell" style="width: 8%;">
+                        </form>
+                        <div class="div-table-cell" style="width: 6%;">
                             <a href="{{route('prestamo.edit', $prestamo)}}">
                             <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
                         </i></a>
                         </div>
-                        <div class="div-table-cell" style="width: 8%;">
+                        <div class="div-table-cell" style="width: 6%;">
                             <a href="{{url('prestamo/'.$prestamo->id)}}">
                             <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
                         </i></a>

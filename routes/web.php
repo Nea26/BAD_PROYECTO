@@ -25,6 +25,7 @@ Route::post('/CrearPrestamo.html', [PrestamoController::class, 'store'])->name('
 Route::get('/prestamo/{prestamo}', [PrestamoController::class, 'show']);
 Route::get('/prestamo/{prestamo}/editar', [PrestamoController::class, 'edit'])->name('prestamo.edit');
 Route::patch('/prestamo/{prestamo}', [PrestamoController::class, 'update'])->name('prestamo.update');
+Route::delete('/prestamo/{prestamo}', [PrestamoController::class, 'destroy'])->name('prestamo.destroy');
 
 
 //prestamos pendientes
@@ -32,6 +33,9 @@ Route::get('/prestamospendientes.html', [PrestamoPendienteController::class, 'in
 Route::get('/prestamo/{prestamo}', [PrestamoPendienteController::class, 'show'])->name('prestamoPendiente.show');
 Route::get('/prestamoPendiente/{prestamo}/editar', [PrestamoPendienteController::class, 'edit'])->name('prestamoPendiente.edit');
 Route::patch('/prestamoPendiente/{prestamo}', [PrestamoPendienteController::class, 'update'])->name('prestamoPendiente.update');
+Route::delete('/prestamoPendiente/{prestamo}', [PrestamoPendienteController::class, 'destroy'])->name('prestamoPendiente.destroy');
+Route::get('/prestamoPendiente/{prestamo}/devolver', [PrestamoPendienteController::class, 'devolver'])->name('prestamoPendiente.devolver');
+Route::patch('/prestamoPendiente/{prestamo}/devolver', [PrestamoPendienteController::class, 'devolucion'])->name('prestamoPendiente.devolucion');
 
 Route::get('/reservaciones.html', function () {
     return view('reservaciones');

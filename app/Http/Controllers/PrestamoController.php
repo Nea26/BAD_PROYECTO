@@ -51,4 +51,9 @@ class PrestamoController extends Controller
 
         return redirect()->route('prestamo.index');
     }
+    public function destroy(PrestamoMiembro $prestamo)
+    {
+        $prestamo->delete();
+        return redirect()->route('prestamo.index');
+    }
 }

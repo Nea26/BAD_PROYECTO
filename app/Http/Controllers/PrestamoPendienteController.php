@@ -35,4 +35,23 @@ class PrestamoPendienteController extends Controller
 
         return redirect()->route('prestamoPendiente.index');
     }
+    public function destroy(PrestamoMiembro $prestamo)
+    {
+        $prestamo->delete();
+        return redirect()->route('prestamoPendiente.index');
+    }
+    public function devolver(PrestamoMiembro $prestamo)
+    {
+        return view('devolverPrestamo',['prestamo' => $prestamo]);
+
+    }
+    public function devolucion(Request $request, PrestamoMiembro $prestamo)
+    {
+        $prestamo->fecha_devuelto = $request->fechaDevuelto;
+        $prestamo->devuelto = 1;
+       
+        $prestamo->save();
+
+        return redirect()->route('prestamoPendiente.index');
+    }
 }
