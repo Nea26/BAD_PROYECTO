@@ -27,8 +27,11 @@ class LoginController extends Controller
             auth()->logout();
             return redirect('/login')->with('error', 'Tu usario se encuentra inactivo, Por favor comunicate con el administrador.');
         }
-
-        return redirect('/home');
+        if ($user->hasRole('bibliotecario')) {
+            return redirect('/home');
+        } else {
+            return redirect('/catalogo');
+        }
     }
 
     /**

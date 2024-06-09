@@ -205,7 +205,7 @@
                        <div class="col-xs-12">
                             <p class="text-center">
                                 <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
-                                <button type="submit" href="{{route('home')}}" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                                <button type="submit" href="{{route('catalogo')}}" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
                             </p> 
                        </div>
                     </div>
@@ -313,7 +313,7 @@
                        <div class="col-xs-12">
                             <p class="text-center">
                                 <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
-                                <button href="{route('home')}" type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                                <button href="{route('catalogo')}" type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
                             </p> 
                         </div>
                     </div>

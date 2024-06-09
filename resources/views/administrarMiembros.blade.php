@@ -6,27 +6,27 @@
     <meta charset="UTF-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="Shortcut Icon" type="image/x-icon" href="assets/icons/book.ico" />
-    <script src="js/sweet-alert.min.js"></script>
-    <link rel="stylesheet" href="css/sweet-alert.css">
-    <link rel="stylesheet" href="css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="Shortcut Icon" type="image/x-icon" href="../assets/icons/book.ico" />
+    <script src="..//js/sweet-alert.min.js"></script>
+    <link rel="stylesheet" href="../css/sweet-alert.css">
+    <link rel="stylesheet" href="../css/material-design-iconic-font.min.css">
+    <link rel="stylesheet" href="../css/normalize.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link
         href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"
         rel="stylesheet">
     <script>
-        window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')
+        window.jQuery || document.write('<script src="../js/jquery-1.11.2.min.js"><\/script>')
     </script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/modernizr.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="../js/modernizr.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="../js/main.js"></script>
 </head>
 
 <body>
@@ -42,7 +42,7 @@
             <div class="nav-lateral-divider full-reset"></div>
             <div class="full-reset" style="padding: 10px 0; color:#fff;">
                 <figure>
-                    <img src="assets/img/logo.png" alt="Biblioteca" class="img-responsive center-box"
+                    <img src="../assets/img/logo.png" alt="Biblioteca" class="img-responsive center-box"
                         style="width:55%;">
                 </figure>
                 <p class="text-center" style="padding-top: 15px;">Sistema Bibliotecario</p>
@@ -83,6 +83,7 @@
                         </ul>
                         @endif
                     </li>
+                    
                     <li>
                         <div class="dropdown-menu-button"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>&nbsp;&nbsp;
                             Libros y catálogo <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i>
@@ -124,7 +125,7 @@
         <nav class="navbar-user-top full-reset">
             <ul class="list-unstyled full-reset">
                 <figure>
-                    <img src="assets/img/user01.png" alt="user-picture" class="img-responsive img-circle center-box">
+                    <img src="../assets/img/user01.png" alt="user-picture" class="img-responsive img-circle center-box">
                 </figure>
                 <li style="color:#fff; cursor:default;">
                     @if (auth()->check())
@@ -169,17 +170,17 @@
                 {{ session('success') }}
             </div>
         @endif
-        <div id="registrarBibliotecario" >
+        <div id="registrarMiembro">
             <br>
-            <div class="container-fluid" style="margin: 50px 0;" id="cabeceraBibliotecario">
+            <div class="container-fluid" id="cabeceraMiembro" style="margin: 50px 0;">
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-md-3">
-                        <img src="assets/img/user01.png" alt="user" class="img-responsive center-box"
+                        <img src="../assets/img/user03.png" alt="user" class="img-responsive center-box"
                             style="max-width: 110px;">
                     </div>
                     <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-                        Bienvenido a la sección para registrar nuevos bibliotecarios en el sistema, debes de llenar
-                        todos los campos del siguiente formulario para registrarlos.
+                        Bienvenido a la sección para registrar nuevos miembros, para poder registrar deberás de llenar
+                        todos los campos del siguiente formulario
                     </div>
                 </div>
             </div>
@@ -187,39 +188,47 @@
                 <div class="row">
                     <div class="col-xs-12 lead">
                         <ol class="breadcrumb">
-                            <li role="presentation" class="active"><a id="nuevoBibliotecario">Nuevo Bibliotecario</a>
-                            </li>
-                            <li role="presentation"><a id="verBibliotecarios">Listado de bibliotecarios</a></li>
+                            <li role="presentation" class="active"><a id="nuevoMiembro">Nuevo Miembro</a></li>
+                            <li role="presentation"><a id="verMiembros">Listado de miembros</a></li>
                         </ol>
                     </div>
                 </div>
             </div>
-            <div class="container-fluid" id="formBibliotecario">
+            <div class="container-fluid" id="formMiembro">
                 <div class="container-flat-form">
-                    <div class="title-flat-form title-flat-blue">Registrar un nuevo bibliotecario</div>
+                    <div class="title-flat-form title-flat-blue">Registrar un nuevo Miembro</div>
                     <form class="form-padding" action="{{ route('register-user') }}" method="POST">
                         @csrf
+
                         <div class="row">
                             <div class="col-xs-12">
                                 <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>
                             </div>
-                            <div class="col-xs-12 ">
+                            {{-- <div class="col-xs-12">
+                            <div class="group-material">
+                                <input type="text" class="material-control tooltips-general" placeholder="Escribe aquí el NIE del alumno" required="" maxlength="20" data-toggle="tooltip" data-placement="top" title="NIE de estudiante">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                <label>Carnet</label>
+                            </div>
+                        </div> --}}
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name="nombre" type="text" class="material-control tooltips-general"
-                                        placeholder="Nombres" required="" maxlength="70"
-                                        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip"
+                                        placeholder="Escribe tu nombre" required=""
+                                        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" maxlength="70" data-toggle="tooltip"
                                         data-placement="top" title="Escribe tu nombre">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Nombres</label>
                                 </div>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name="apellido" type="text" class="material-control tooltips-general"
-                                        placeholder="Apellidos" required="" maxlength="70"
-                                        pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip"
-                                        data-placement="top" title="Escribe tus apellidos">
+                                        placeholder="Escribe tus apellidos" required=""
+                                        pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" maxlength="70" data-toggle="tooltip"
+                                        data-placement="top" title="Escribe tus Apellidos">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Apellidos</label>
@@ -227,16 +236,57 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
+                                    <input name="fecha_nac" type="date" class="material-control tooltips-general"
+                                        placeholder="Fecha de nacimiento" required="" data-toggle="tooltip"
+                                        data-placement="top" title="Fecha de nacimiento">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Fecha de nacimiento</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="group-material">
+                                    <input name="telefono" type="tel" class="material-control tooltips-general"
+                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip"
+                                        data-placement="top" title="Ingrese su numero de telefono">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Teléfono</label>
+                                </div>
+                            </div>
+                            <input type="hidden" name="role_id" value="2">
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="group-material">
+                                    <input name="tipo_identificacion" type="text"
+                                        class="material-control tooltips-general" placeholder="Tipo de identificación"
+                                        required="" data-toggle="tooltip" data-placement="top"
+                                        title="Ingresa el tipo de identificación">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Tipo de identificación</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="group-material">
+                                    <input name="num_identificacion" type="text"
+                                        class="material-control tooltips-general"
+                                        placeholder="Número de identificación" required="" data-toggle="tooltip"
+                                        data-placement="top" title="Ingresa el número de identificación">
+                                    <span class="highlight"></span>
+                                    <span class="bar"></span>
+                                    <label>Número de identificación</label>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-6">
+                                <div class="group-material">
                                     <input name="email" type="email" class="material-control tooltips-general"
-                                        placeholder="E-mail" maxlength="50" data-toggle="tooltip"
-                                        data-placement="top" title="Escribe tu email">
+                                        placeholder="E-mail" required="" maxlength="50" data-toggle="tooltip"
+                                        data-placement="top" title="Escribe el Email del miembro">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Email</label>
                                 </div>
                             </div>
-
-                            <input type="hidden" name="role_id" value="1">
                             <div class="col-xs-12">
                                 <legend><i class="zmdi zmdi-lock"></i> &nbsp; Datos de la cuenta</legend><br>
                             </div>
@@ -263,6 +313,7 @@
                                     <label>Contraseña</label>
                                 </div>
                             </div>
+                            <input type="hidden" name="tipo" value="miembro">
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name="password_confirmation" type="password"
@@ -274,7 +325,6 @@
                                     <label>Repetir contraseña</label>
                                 </div>
                             </div>
-                            <input type="hidden" name="tipo" value="bibliotecario">
                             <div class="col-xs-12">
                                 <p class="text-center">
                                     <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i
@@ -286,64 +336,66 @@
                         </div>
                     </form>
                 </div>
+
             </div>
-            <div class="container-fluid" id="listadoBibliotecarios" style="display: none;">
+            {{-- Listado de miembros --}}
+            <div class="container-fluid" id="listadoMiembros" style="display: none;">
                 <div class="container-fluid" style="margin: 50px 0;">
                     <div class="row">
                         <div class="col-xs-12 col-sm-4 col-md-3">
-                            <img src="assets/img/user01.png" alt="user" class="img-responsive center-box"
+                            <img src="../assets/img/user03.png" alt="user" class="img-responsive center-box"
                                 style="max-width: 110px;">
                         </div>
                         <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-                            Bienvenido a la sección donde se encuentra el listado de Bibliotecarios registrados en el
-                            sistema, puedes actualizar algunos datos de los bibliotecarios o eliminar el registro
-                            completo.
+                            Bienvenido a la sección donde se encuentra el listado de miembros del sistema bibliotecario,
+                            podrás buscar los miembros por nombre,apellido o carnet. Puedes actualizar o eliminar los datos
+                            del miembro.<br>
+                            <strong class="text-danger"><i class="zmdi zmdi-alert-triangle"></i> &nbsp; ¡Importante!
+                            </strong>Si eliminas el miembro del sistema se borrarán todos los datos relacionados con
+                            él.
                         </div>
                     </div>
-                    <h2 class="text-center all-tittles">Lista de Bibliotecarios</h2>
-                    <!-- Botón de búsqueda -->
-                    <input type="text" name="search_Bibliotecario" class="mb-3 form-control" id="search_Bibliotecario" placeholder="Buscar Bibliotecarios...">
+                </div>
+                <div class="container-fluid" style="margin: 0 0 50px 0;">
+                    
+                </div>
+                <div class="container-fluid">
+                    <h2 class="text-center all-tittles">Listado de Miembros</h2>
+                    <input type="text" name="search_Miembro" class="mb-3 form-control" id="search_Miembro" placeholder="Buscar Miembro...">
                     <br>
                     <div class="table-data"  id="datos-buscador">
-                        
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Carnet</th>
                                     <th>Nombres</th>
                                     <th>Apellidos</th>
-                                    <th>Username</th>
-                                    <th>Estado</th>
-                                    <th style="width: 10%;">Acciones</th>
+                                    <th>Telefono</th>
+                                    <th>Correo</th>
+                                    <th>Membresia</th>
+                                    <th>Vigencia</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="bibliotecariosTableBody">
-                                @foreach ($bibliotecarios as $bibliotecario)
+                            <tbody>
+                                @foreach ($miembros as $miembro)
                                     <tr>
-                                        <td>{{ $bibliotecario->ID_BIBLIOTECARIO }}</td>
-                                        <td>{{ $bibliotecario->NOMBRE }}</td>
-                                        <td>{{ $bibliotecario->APELLIDO }}</td>
-                                        <td>{{ $bibliotecario->USER_NAME }}</td>
-                                        <td>{{ $bibliotecario->activo ? 'Activo' : 'Inactivo' }}</td>
+                                        <td>{{ $miembro->CARNET_MIEMBRO }}</td>
+                                        <td>{{ $miembro->NOMBRE }}</td>
+                                        <td>{{ $miembro->APELLIDO }}</td>
+                                        <td>{{ $miembro->TELEFONO }}</td>
+                                        <td>{{ $miembro->CORREO }}</td>
+                                        <td>{{ $miembro->FECHA_MEMBRESIA }}</td>
+                                        <td>{{ $miembro->VIGENCIA }}</td>
                                         <td>
                                             <div style="display: flex; justify-content: space-between;">
-                                                <form method="POST"
-                                                    action="{{ route('bibliotecario/home/estado/', $bibliotecario->user_id) }}">
-                                                    @csrf
-                                                    <button type="submit" class="btn btn-secondary"
-                                                        data-toggle="tooltip" data-placement="top"
-                                                        title="Cambia el estado"><i
-                                                            class="zmdi zmdi-swap"></i></button>
-                                                </form>
-                                                <a href="{{ url('bibliotecario/home/edit/' . $bibliotecario->ID_BIBLIOTECARIO) }}"
+                                                <a href="{{ url('miembro/home/edit/' . $miembro->user_id) }}"
                                                     class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
-                                                <form
-                                                    action="{{ url('bibliotecario/home/' . $bibliotecario->user_id) }}"
-                                                    method="post" id="deleteFormB{{ $bibliotecario->user_id }}">
+                                                <form action="{{ url('miembro/home/' . $miembro->user_id) }}"
+                                                    method="post" id="deleteFormM{{ $miembro->user_id }}">
                                                     @csrf
                                                     {{ method_field('DELETE') }}
-                                                    <button
-                                                        onclick="confirmDeleteB(event, {{ $bibliotecario->user_id }})"
+                                                    <button onclick="confirmDeleteM(event, {{ $miembro->user_id }})"
                                                         class=" btn btn-danger" type="submit"><i
                                                             class="zmdi zmdi-delete"></i></button>
                                                 </form>
@@ -353,12 +405,12 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <!-- Paginación -->
-                    {!! $bibliotecarios->links() !!} 
+                        {{ $miembros->links() }}
                     </div>
-                    
+
                 </div>
             </div>
+        </div>
             <div class="modal fade" tabindex="-1" role="dialog" id="ModalHelp">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -402,10 +454,8 @@
                 </div>
                 <div class="footer-copyright full-reset all-tittles">BAD_115</div>
             </footer>
-            <script src="{{ asset('js/registro/registroUsuarios.js') }}"></script>
-            <script src="{{ asset('js/bibliotecario/bibliotecarioCrud.js') }}"></script>
-            
-            @include('filtrado/filtrado')
+            <script src="{{ asset('js/bibliotecario/miembroCrud.js') }}"></script>
+            @include('filtrado.filtradoMiembro')
             
 </body>
 

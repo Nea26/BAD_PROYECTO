@@ -61,19 +61,19 @@
                         </ul>
                     </li>
                     <li>
+                        @if(auth()->user()->hasRole('bibliotecario'))
                         <div class="dropdown-menu-button"><i class="zmdi zmdi-account-add zmdi-hc-fw"></i>&nbsp;&nbsp;
-                            Registro de usuarios <i
+                            Administración de usuarios <i
                                 class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i></div>
                         <ul class="list-unstyled">
-                            <li><a href="admin.html"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
-                                    administrador</a></li>
-                            <li><a href="teacher.html"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
-                                    docente</a></li>
-                            <li><a href="student.html"><i class="zmdi zmdi-accounts zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
-                                    estudiante</a></li>
-                            <li><a href="personal.html"><i class="zmdi zmdi-male-female zmdi-hc-fw"></i>&nbsp;&nbsp;
-                                    Nuevo personal administrativo</a></li>
+                            <li><a href="{{ route('home') }}"><i class="zmdi zmdi-face zmdi-hc-fw"></i>&nbsp;&nbsp; Administrar
+                            bibliotecarios</a></li>
+                            <li><a href="{{ route('home/profesores') }}"><i class="zmdi zmdi-male-alt zmdi-hc-fw"></i>&nbsp;&nbsp; Administrar
+                                profesores</a></li>
+                            <li><a href="{{ route('home/miembros') }}"><i class="zmdi zmdi-accounts zmdi-hc-fw"></i>&nbsp;&nbsp; Administrar
+                                miembros</a></li>
                         </ul>
+                        @endif
                     </li>
                     <li>
                         <div class="dropdown-menu-button"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>&nbsp;&nbsp;
@@ -120,19 +120,22 @@
                 </figure>
                 <li style="color:#fff; cursor:default;">
                     @if (auth()->check())
-                        <span class="all-tittles">{{ auth()->user()->nombre }} {{ auth()->user()->apellido }}</span>
-                    @endif
-                </li>
+                    <span class="all-tittles">{{ explode(' ', auth()->user()->nombre)[0] }}
+                        {{ explode(' ', auth()->user()->apellido)[0] }}</span>
+                @endif
+            </li>
 
-                <li class="tooltips-general exit-system-button" data-placement="bottom" title="Salir del sistema">
-                    <a href="{{ route('logout') }}" onclick="salirSistema(event);" style="color: #fff; font-size: 20px;">
-                        <i class="zmdi zmdi-power"></i>
-                    </a>
+            <li class="tooltips-general exit-system-button" data-placement="bottom" title="Salir del sistema">
+                <a href="{{ route('logout') }}" onclick="salirSistema(event);"
+                    style="color: #fff; font-size: 20px;">
+                    <i class="zmdi zmdi-power"></i>
+                </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                </li>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
+            </li>
+
 
 
                 <li class="tooltips-general search-book-button" data-href="searchbook.html" data-placement="bottom"
@@ -279,6 +282,7 @@
             <div class="footer-copyright full-reset all-tittles">© 2018 Carlos Alfaro</div>
         </footer>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/bibliotecario/bibliotecarioCrud.js') }}"></script>
 </body>
 </html>

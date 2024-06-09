@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\Paginator;
+
 class HomeController extends Controller
 {
     /**
@@ -24,19 +28,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // listado de miembros
-        $miembros = DB::table('miembro')->get();
+        Paginator::useBootstrap();
         // listado de bibliotecarios
         $bibliotecarios = DB::table('bibliotecario')
-        ->join('users','bibliotecario.user_id','=','users.id')
-        ->select('bibliotecario.*','users.activo')->get();
-        // listado de profesores
-        $profesores = DB::table('profesor')->get();
-
+            ->join('users', 'bibliotecario.user_id', '=', 'users.id')
+            ->select('bibliotecario.*', 'users.activo')->paginate(5);
         return view('homeBibliotecario', [
-            'profesores' => $profesores,
             'bibliotecarios' => $bibliotecarios,
-            'miembros' => $miembros
+
         ]);
     }
     public function catalogoLibros()

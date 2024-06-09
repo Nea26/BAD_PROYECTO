@@ -33,3 +33,10 @@ function salirSistema(event) {
         }
     })
 }
+$(document).ready(function(){
+    
+    // Desaparecer la alerta al hacer clic en ella
+    $('#success-alert').click(function() {
+        $(this).fadeOut('slow');
+    });
+});

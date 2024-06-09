@@ -6,6 +6,10 @@ use App\Models\Bibliotecario;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
+
+use function Termwind\render;
 
 class BibliotecarioController extends Controller
 {
@@ -35,22 +39,21 @@ class BibliotecarioController extends Controller
     public function edit($id)
     {
         $bibliotecario = Bibliotecario::find($id);
-        $user= User::find($bibliotecario->user_id);
+        $user = User::find($bibliotecario->user_id);
         return view('/editarUsuarios/editarBibliotecario', ['bibliotecario' => $bibliotecario, 'user' => $user]);
     }
     public function show(string $id)
     {
-        
     }
     //Actualizar bibliotecario
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-         $bibliotecario = Bibliotecario::where('user_id', $id)->first();
-        
+        $bibliotecario = Bibliotecario::where('user_id', $id)->first();
+
 
         // Actualiza los campos del usuario
-        $userData = $request->only('nombre', 'apellido', 'name', 'password', 'email'); 
+        $userData = $request->only('nombre', 'apellido', 'name', 'password', 'email');
 
         // Si se proporcionó una nueva contraseña, hashea la contraseña antes de actualizar el usuario
         if ($request->filled('password')) {
@@ -71,4 +74,29 @@ class BibliotecarioController extends Controller
 
         return redirect()->route('home')->with('success', 'Actualizacion exitosa');
     }
+    //Buscar bibliotecario
+    public function buscar(Request $request)
+    {
+        Paginator::useBootstrap();
+        $bibliotecarios = DB::table('bibliotecario')
+    ->join('users', 'bibliotecario.user_id', '=', 'users.id')
+    ->where('bibliotecario.NOMBRE', 'like', '%' . $request->buscar_Bibliotecario . '%')
+    ->orWhere('bibliotecario.APELLIDO', 'like', '%' . $request->buscar_Bibliotecario . '%')
+    ->orderBy('bibliotecario.ID_BIBLIOTECARIO')
+    ->paginate(5);
+    if ($bibliotecarios->isEmpty()) {
+        return response()->json(['status' => 'error', 'message' => 'No se encontraron resultados']);
+    } else {
+        return view('homeBibliotecario', compact('bibliotecarios'));
+    }
+    }
+    //Paginacion de bibliotecarios
+    public function pagination(){
+        Paginator::useBootstrap();
+        $bibliotecarios = DB::table('bibliotecario')
+            ->join('users', 'bibliotecario.user_id', '=', 'users.id')
+            ->select('bibliotecario.*', 'users.activo')->paginate(5);
+        return view('paginacion/paginacionBiblio', compact('bibliotecarios'));
+    }
+
 }
