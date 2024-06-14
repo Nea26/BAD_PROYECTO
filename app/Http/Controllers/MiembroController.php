@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Miembro;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class MiembroController extends Controller
 {
@@ -14,6 +16,8 @@ class MiembroController extends Controller
         $this->middleware('can:miembro.home.destroy')->only('destroy');
         $this->middleware('can:miembro.home.edit')->only('edit');
         $this->middleware('can:miembro.home.update')->only('update');
+        $this->middleware('can:miembro.home.buscar')->only('buscar');
+        $this->middleware('can:miembro.home.show')->only('verMiembros');
         
     }
     //
@@ -70,4 +74,38 @@ class MiembroController extends Controller
 
         return redirect()->route('home')->with('success', 'Actualizacion exitosa');
     }
+    public function verMiembros(){
+        
+        Paginator::useBootstrap();
+        // listado de Miembros
+        $miembros = DB::table('miembro')
+            ->join('users', 'miembro.user_id', '=', 'users.id')
+            ->select('miembro.*', 'users.activo')->paginate(5);
+        return view('administrarMiembros', [
+            'miembros' => $miembros,
+        ]);
+    }
+    public function buscar(Request $request){
+        Paginator::useBootstrap();
+        $miembros = DB::table('miembro')
+        ->join('users', 'miembro.user_id', '=', 'users.id')
+        ->where('miembro.NOMBRE', 'like', '%' . $request->buscar_Miembro . '%')
+        ->orWhere('miembro.APELLIDO', 'like', '%' . $request->buscar_Miembro . '%')
+        ->orWhere('miembro.CARNET_Miembro', 'like', '%' . $request->buscar_Miembro . '%')
+        ->orderBy('miembro.NOMBRE', 'asc')
+        ->paginate(5);
+        if ($miembros->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'No se encontraron resultados']);
+        } else {
+            return view('administrarMiembros', compact('miembros'));
+        }
+        }
+        //Paginacion de miembros
+        public function pagination(){
+            Paginator::useBootstrap();
+            $miembros = DB::table('miembro')
+                ->join('users', 'miembro.user_id', '=', 'users.id')
+                ->select('miembro.*', 'users.activo')->paginate(5);
+                return view('paginacion/paginacionMiembros', compact('miembros'));
+        }
 }

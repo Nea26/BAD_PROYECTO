@@ -8,8 +8,11 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Autenticable;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Testing\Fluent\Concerns\Has;
 use Spatie\Permission\Traits\HasRoles;
 /**
  * Class User
@@ -37,6 +40,8 @@ use Spatie\Permission\Traits\HasRoles;
 class User extends Autenticable
 {
 	use HasRoles;
+	use HasFactory;
+	use Notifiable;
 	protected $table = 'users';
 
 	protected $casts = [

@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\Profesor;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Pagination\Paginator;
 
 class ProfesorController extends Controller
 {
@@ -14,6 +16,9 @@ class ProfesorController extends Controller
         $this->middleware('can:profesor.home.destroy')->only('destroy');
         $this->middleware('can:profesor.home.edit')->only('edit');
         $this->middleware('can:profesor.home.update')->only('update');
+        $this->middleware('can:profesor.home.buscar')->only('buscar');
+        $this->middleware('can:profesor.home.show')->only('verProfesores');
+
         
     }
     //
@@ -34,6 +39,17 @@ class ProfesorController extends Controller
     }
     public function show(string $id)
     {
+    }
+    public function verProfesores(){
+        
+        Paginator::useBootstrap();
+        // listado de Profesores
+        $profesores = DB::table('profesor')
+            ->join('users', 'profesor.user_id', '=', 'users.id')
+            ->select('profesor.*', 'users.activo')->paginate(5);
+        return view('administrarProfesores', [
+            'profesores' => $profesores,
+        ]);
     }
     public function edit($user_id)
     {
@@ -66,5 +82,30 @@ class ProfesorController extends Controller
 
         $profesor->update($profesorData);
         return redirect()->route('home')->with('success', 'Actualizacion exitosa');
+    }
+    //Buscar profesor
+    public function buscar(Request $request)
+    {
+        Paginator::useBootstrap();
+        $profesores = DB::table('profesor')
+    ->join('users', 'profesor.user_id', '=', 'users.id')
+    ->where('profesor.NOMBRE', 'like', '%' . $request->buscar_Profesor . '%')
+    ->orWhere('profesor.APELLIDO', 'like', '%' . $request->buscar_Profesor . '%')
+    ->orWhere('profesor.CARNET_PROFESOR', 'like', '%' . $request->buscar_Profesor . '%')
+    ->orderBy('profesor.NOMBRE', 'asc')
+    ->paginate(5);
+    if ($profesores->isEmpty()) {
+        return response()->json(['status' => 'error', 'message' => 'No se encontraron resultados']);
+    } else {
+        return view('administrarProfesores', compact('profesores'));
+    }
+    }
+    //Paginacion de profesores
+    public function pagination(){
+        Paginator::useBootstrap();
+        $profesores = DB::table('profesor')
+            ->join('users', 'profesor.user_id', '=', 'users.id')
+            ->select('profesor.*', 'users.activo')->paginate(5);
+            return view('paginacion/paginacionProf', compact('profesores'));
     }
 }
