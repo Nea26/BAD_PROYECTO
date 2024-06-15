@@ -1,17 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\PrestamoController;
 use App\Http\Controllers\PrestamoPendienteController;
 
-=======
 use App\Http\Controllers\UsuariosRegistroController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\BibliotecarioController;
 use App\Http\Controllers\MiembroController;
 use App\Http\Controllers\LibroController;
->>>>>>> master
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +23,6 @@ use App\Http\Controllers\LibroController;
 Route::get('/home.html', function () {
     return view('home2');
 });
-<<<<<<< HEAD
-=======
 
 Auth::routes();
 
@@ -76,7 +71,6 @@ Route::prefix('miembro')->group(function () {
     
 });
 
->>>>>>> master
 //Prestamo Miembros
 Route::get('/prestamo.html', [PrestamoController::class, 'index'])->name('prestamo.index');
 Route::get('/CrearPrestamo.html', [PrestamoController::class, 'create']);
@@ -108,10 +102,7 @@ Route::get('/reportes.html', function () {
 Route::get('/prueba', function () {
     return DB::select('select * from PRESTAMOMIEMBRO');
 });
-<<<<<<< HEAD
 
 
 
 
-=======
->>>>>>> master
