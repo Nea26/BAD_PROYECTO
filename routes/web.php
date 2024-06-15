@@ -6,6 +6,9 @@ use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\BibliotecarioController;
 use App\Http\Controllers\MiembroController;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\CatalogoController;
+use App\Http\Controllers\PrestamoController;
+use App\Http\Controllers\PrestamoPendienteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +28,7 @@ Auth::routes();
 
 Route::get('/catalogo', [App\Http\Controllers\HomeController::class, 'catalogoLibros'])->name('catalogo');
 Route::resource('book', LibroController::class );
+Route::resource('catalog', CatalogoController::class );
 
 Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
 Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
