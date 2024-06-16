@@ -26,6 +26,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
+Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
+Route::get('/miembro/home/buscar', [MiembroController::class, 'buscar'])->name('miembro/home/buscar');
+
 Route::get('/catalogo', [App\Http\Controllers\HomeController::class, 'catalogoLibros'])->name('catalogo');
 Route::resource('book', LibroController::class );
 Route::resource('catalog', CatalogoController::class );
