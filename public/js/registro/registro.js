@@ -27,3 +27,11 @@ document.getElementById("mostrarMiembro").addEventListener("click", function() {
     document.getElementById("mostrarBiblio").parentNode.classList.remove("active");
     document.getElementById("mostrarProfesor").parentNode.classList.remove("active");
 });
+
+$(document).ready(function(){
+    
+    // Desaparecer la alerta al hacer clic en ella
+    $('.alert').click(function() {
+        $(this).fadeOut('slow');
+    });
+});

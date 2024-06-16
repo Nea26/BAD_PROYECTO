@@ -22,6 +22,7 @@ $(document).ready(function(){
     $('#success-alert').click(function() {
         $(this).fadeOut('slow');
     });
+    
 });
 
 //Salir del sistema

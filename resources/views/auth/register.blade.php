@@ -56,6 +56,15 @@
               <h1 class="all-tittles">Sistema bibliotecario <small> Registrate</small></h1>
             </div>
         </div>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="conteiner-fluid">
             <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
                 <li role="presentation"><a  id="mostrarBiblio">Bibliotecario</a></li>
@@ -76,15 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Miembro</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+        
         <div class="container-fluid">
             <div class="container-flat-form">
                 <div class="title-flat-form title-flat-blue">Registrar un nuevo Miembro</div>
@@ -128,7 +129,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="telefono" type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
+                                <input name="telefono" type="tel" class="material-control tooltips-general"
+                                 placeholder="Teléfono"  required="" maxlength="15" pattern="[0-9\-]+$" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Teléfono</label>
@@ -145,7 +147,7 @@
                             </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="num_identificacion" type="text" class="material-control tooltips-general" placeholder="Número de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el número de identificación">
+                                <input name="num_identificacion" type="text" class="material-control tooltips-general" pattern="[0-9\-]+$" placeholder="Número de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el número de identificación">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Número de identificación</label>
@@ -172,7 +174,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Contraseña</label>
@@ -181,11 +183,10 @@
                         <input type="hidden" name="tipo" value="miembro">
                         <div class="col-xs-12 col-sm-6">
                            <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
+                                <input name="password_confirmation" type="password" class="material-control tooltips-general" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Repetir contraseña</label>
-                           </div>
+                                <label>Repetir contraseña</label>                           </div>
                         </div>
                        <div class="col-xs-12">
                             <p class="text-center">
@@ -209,16 +210,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Profesor</li>
-                      
-                    </ol>
-                </div>
-            </div>
-        </div>
+        
         
         <div class="container-fluid">
             <div class="container-flat-form">
@@ -232,7 +224,7 @@
                         <input type="hidden" name="tipo" value="profesor">
                         <div class="col-xs-12">
                             <div class="group-material">
-                                <input name='dui' type="text" class="material-control tooltips-general" placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9-]{1,10}" required="" maxlength="10" data-toggle="tooltip" data-placement="top" title="Solamente números y guiones, 10 dígitos">
+                                <input name='dui' type="text" class="material-control tooltips-general" placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9\-]{1,10}" required="" maxlength="10" data-toggle="tooltip" data-placement="top" title="Solamente números y guiones, 10 dígitos">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Número de DUI</label>
@@ -257,7 +249,7 @@
                         <input type="hidden" name="role_id" value="3">
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name='telefono' type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
+                                <input name='telefono' type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" pattern="[0-9\-]+$" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Teléfono</label>
@@ -280,7 +272,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Contraseña</label>
@@ -289,7 +281,7 @@
                         
                         <div class="col-xs-12 col-sm-6">
                            <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
+                                <input name="password_confirmation" type="password" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Repetir contraseña</label>
@@ -317,15 +309,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Bibliotecario</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+        
         <div class="container-fluid">
             <div class="container-flat-form">
                 <div class="title-flat-form title-flat-blue">Registrar un nuevo bibliotecario</div>
@@ -353,7 +337,7 @@
                          </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="email" type="email" class="material-control tooltips-general" placeholder="E-mail"  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe tu email">
+                                <input name="email" type="email" class="material-control tooltips-general" placeholder="E-mail" required=""  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe tu email">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Email</label>
@@ -374,7 +358,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Contraseña</label>
@@ -382,7 +366,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                            <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
+                                <input name="password_confirmation" type="password" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Repetir contraseña</label>
@@ -436,7 +420,7 @@
             <div class="footer-copyright full-reset all-tittles">© BAD115_2024</div>
         </footer>
     </div>
-    <script src="{{asset('js/registro/registro.js')}}"></script>
+    <script src=/js/registro/registro.js></script>
 </body>
 
 </html>

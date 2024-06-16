@@ -35,6 +35,7 @@ class UsuariosRegistroController extends Controller
                 'USER_NAME' => $request->input('name'),
                 'PASSWORD' => Hash::make($request->input('password')),
             ]);
+            $user->assignRole('bibliotecario');
         } 
         else if ($form_type == 'miembro') {
             $counter = 0;
@@ -59,6 +60,7 @@ class UsuariosRegistroController extends Controller
                 'COSTO_CARNET' => 5.0,
                 'PENALIZADO' => false,
             ]);
+            $user->assignRole('miembro');
         } 
         else if ($form_type == 'profesor') {
             $counter = 0;
@@ -77,6 +79,7 @@ class UsuariosRegistroController extends Controller
                 'TELEFONO' => $request->input('telefono'),
                 'CORREO' => $request->input('email'),
             ]);
+            $user->assignRole('profesor');
         }
         return redirect()->back()->with('success', 'Usuario creado con éxito.');
     }

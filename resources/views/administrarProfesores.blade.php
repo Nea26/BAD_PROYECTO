@@ -25,6 +25,7 @@
                 {{ session('success') }}
             </div>
         @endif
+        
         <div id="registrarProfesor">
             <br>
             <div class="container-fluid" id="cabeceraProfesor" style="margin: 50px 0;">
@@ -63,7 +64,7 @@
                             <div class="col-xs-12">
                                 <div class="group-material">
                                     <input name='dui' type="text" class="material-control tooltips-general"
-                                        placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9-]{1,10}"
+                                        placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9\-]{1,10}"
                                         required="" maxlength="10" data-toggle="tooltip" data-placement="top"
                                         title="Solamente números y guiones, 10 dígitos">
                                     <span class="highlight"></span>
@@ -99,7 +100,7 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name='telefono' type="tel" class="material-control tooltips-general"
-                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip"
+                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip" pattern="[0-9\-]+$"
                                         data-placement="top" title="Ingrese su numero de telefono">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -130,9 +131,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
-                                    <input name="password" type="password" class="material-control tooltips-general"
-                                        placeholder="Contraseña" required="" maxlength="200"
-                                        data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                    <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Contraseña</label>
@@ -143,7 +142,7 @@
                                 <div class="group-material">
                                     <input name="password_confirmation" type="password"
                                         class="material-control tooltips-general" placeholder="Repite la contraseña"
-                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top"
+                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$"
                                         title="Repite la contraseña">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -243,11 +242,10 @@
                             <h4 class="modal-title text-center all-tittles">ayuda del sistema</h4>
                         </div>
                         <div class="modal-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore dignissimos qui
-                            molestias
-                            ipsum officiis unde aliquid consequatur, accusamus delectus asperiores sunt. Quibusdam
-                            veniam
-                            ipsa accusamus error. Animi mollitia corporis iusto.
+                            En esta sección puedes registrar a los profesores para usar el sistema bibliotecario, para ello
+                            debes de llenar todos los campos del formulario. <br>
+                            También puedes ver el listado de profesores registrados en el sistema, actualizar sus datos o
+                            eliminar el registro completo del docente. <br>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><i

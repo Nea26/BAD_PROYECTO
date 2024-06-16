@@ -102,7 +102,7 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name="telefono" type="tel" class="material-control tooltips-general"
-                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip"
+                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip" pattern="[0-9\-]+$"
                                         data-placement="top" title="Ingrese su numero de telefono">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -125,7 +125,7 @@
                                 <div class="group-material">
                                     <input name="num_identificacion" type="text"
                                         class="material-control tooltips-general"
-                                        placeholder="Número de identificación" required="" data-toggle="tooltip"
+                                        placeholder="Número de identificación" required="" data-toggle="tooltip" pattern="[0-9\-]+$"
                                         data-placement="top" title="Ingresa el número de identificación">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -160,9 +160,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
-                                    <input name="password" type="password" class="material-control tooltips-general"
-                                        placeholder="Contraseña" required="" maxlength="200"
-                                        data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                    <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Contraseña</label>
@@ -173,7 +171,7 @@
                                 <div class="group-material">
                                     <input name="password_confirmation" type="password"
                                         class="material-control tooltips-general" placeholder="Repite la contraseña"
-                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top"
+                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$"
                                         title="Repite la contraseña">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -277,11 +275,7 @@
                         <h4 class="modal-title text-center all-tittles">ayuda del sistema</h4>
                     </div>
                     <div class="modal-body">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore dignissimos qui
-                        molestias
-                        ipsum officiis unde aliquid consequatur, accusamus delectus asperiores sunt. Quibusdam
-                        veniam
-                        ipsa accusamus error. Animi mollitia corporis iusto.
+                        En este espacio puedes administrar los miembros del sistema bibliotecario, puedes registrar nuevos miembros y ver el listado de miembros registrados en el sistema.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal"><i
