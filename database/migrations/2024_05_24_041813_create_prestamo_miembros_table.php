@@ -19,9 +19,10 @@ return new class extends Migration
             $table->integer('id_multa')->unsigned()->nullable();
             $table->integer('id_bibliotecario')->unsigned()->nullable();
             $table->string('carnet_miembro');
-            $table->date('fecha_prestamo');
-            $table->date('fecha_devolucion');
+            $table->date('fecha_prestamo')->nullable();
+            $table->date('fecha_devolucion')->nullable();
             $table->boolean('devuelto')->default(false);
+            $table->boolean('aprobado')->default(false);
             $table->string('usuario_autorizo')->nullable();
             $table->date('fecha_devuelto')->nullable();
 
