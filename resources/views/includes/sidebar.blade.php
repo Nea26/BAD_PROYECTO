@@ -54,15 +54,17 @@
                     @endif
                 </li>
                 <li>
+                    @if(auth()->user()->hasRole('bibliotecario'))
                     <div class="dropdown-menu-button"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>&nbsp;&nbsp;
                         Libros y catálogo <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i>
                     </div>
                     <ul class="list-unstyled">
-                        <li><a href="book.html"><i class="zmdi zmdi-book zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
+                        <li><a href="{{ route('book.index') }}"><i class="zmdi zmdi-book zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
                                 libro</a></li>
-                        <li><a href="{{ route('catalogo') }}"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp;
+                        <li><a href="{{ route('catalogo.index') }}"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp;
                                 Catálogo</a></li>
                     </ul>
+                    @endif
                 </li>
                 <li>
                     <div class="dropdown-menu-button"><i class="zmdi zmdi-alarm zmdi-hc-fw"></i>&nbsp;&nbsp;

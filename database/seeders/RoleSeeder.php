@@ -38,6 +38,7 @@ class RoleSeeder extends Seeder
         Permission::create(['name' => 'miembro.home.buscar'])->assignRole($role1);
         Permission::create(['name' => 'miembro.home.show'])->assignRole($role1);
         Permission::create(['name' => 'profesor.home.show'])->assignRole($role1);
+        Permission::create(['name' => 'bibliotecario.catalog.show'])->assignRole($role1);
         
 
     }

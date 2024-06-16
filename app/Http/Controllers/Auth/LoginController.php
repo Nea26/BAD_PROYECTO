@@ -29,7 +29,9 @@ class LoginController extends Controller
         }
         if ($user->hasRole('bibliotecario')) {
             return redirect('/home');
-        } else {
+        } elseif ($user->hasRole('profesor')) {
+            // code...
+        }else {
             return redirect('/catalogo');
         }
     }
