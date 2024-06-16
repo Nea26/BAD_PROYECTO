@@ -139,10 +139,16 @@
                         <input type="hidden" name="role_id" value="2">
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="tipo_identificacion" type="text" class="material-control tooltips-general" placeholder="Tipo de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el tipo de identificación">
+                                <select name="tipo_identificacion" class="material-control tooltips-general" required="" data-toggle="tooltip" data-placement="top" >
+                                    <option value="">-- Selecciona el tipo de identificación --</option>
+                                    <option value="dui">DUI</option>
+                                    <option value="pasaporte">Pasaporte</option>
+                                    <option value="licencia">Licencia</option>
+                                    <option value="otro">Otro</option>
+                                </select>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Tipo de identificación</label>
+                                
                             </div>
                             </div>
                         <div class="col-xs-12 col-sm-6">
@@ -191,7 +197,7 @@
                        <div class="col-xs-12">
                             <p class="text-center">
                                 <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
-                                <button type="submit" href="{{route('catalogo')}}" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                                <button type="submit" href="{{route('catalogo.index')}}" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
                             </p> 
                        </div>
                     </div>

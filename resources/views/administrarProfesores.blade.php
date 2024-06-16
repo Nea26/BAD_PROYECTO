@@ -197,6 +197,7 @@
                                     <th>DUI</th>
                                     <th>Correo</th>
                                     <th>Teléfono</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -209,7 +210,16 @@
                                         <td>{{ $profesor->DUI }}</td>
                                         <td>{{ $profesor->CORREO }}</td>
                                         <td>{{ $profesor->TELEFONO }}</td>
+                                        <td>{{ $profesor->activo ? 'Activo' : 'Inactivo' }}</td>
                                         <td>
+                                            <form method="POST"
+                                                    action="{{ route('profesor/home/estado/', $profesor->user_id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-secondary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Cambia el estado"><i
+                                                            class="zmdi zmdi-swap"></i></button>
+                                                </form>
                                             <div style="display: flex; justify-content: space-between;">
                                                 <a href="{{ url('profesor/home/edit/' . $profesor->user_id) }}"
                                                     class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>

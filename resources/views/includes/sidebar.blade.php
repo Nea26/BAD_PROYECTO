@@ -60,7 +60,7 @@
                     <ul class="list-unstyled">
                         <li><a href="book.html"><i class="zmdi zmdi-book zmdi-hc-fw"></i>&nbsp;&nbsp; Nuevo
                                 libro</a></li>
-                        <li><a href="{{ route('catalogo') }}"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp;
+                        <li><a href=""><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp;
                                 Catálogo</a></li>
                     </ul>
                 </li>

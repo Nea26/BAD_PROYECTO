@@ -112,13 +112,16 @@
                             <input type="hidden" name="role_id" value="2">
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
-                                    <input name="tipo_identificacion" type="text"
-                                        class="material-control tooltips-general" placeholder="Tipo de identificación"
-                                        required="" data-toggle="tooltip" data-placement="top"
-                                        title="Ingresa el tipo de identificación">
+                                    <select name="tipo_identificacion" class="material-control tooltips-general" required="" data-toggle="tooltip" data-placement="top" >
+                                        <option value="">-- Selecciona el tipo de identificación --</option>
+                                        <option value="dui">DUI</option>
+                                        <option value="pasaporte">Pasaporte</option>
+                                        <option value="licencia">Licencia</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
-                                    <label>Tipo de identificación</label>
+                                    
                                 </div>
                             </div>
                             <div class="col-xs-12 col-sm-6">
@@ -229,6 +232,7 @@
                                     <th>Correo</th>
                                     <th>Membresia</th>
                                     <th>Vigencia</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -242,8 +246,17 @@
                                         <td>{{ $miembro->CORREO }}</td>
                                         <td>{{ $miembro->FECHA_MEMBRESIA }}</td>
                                         <td>{{ $miembro->VIGENCIA }}</td>
+                                        <td>{{ $miembro->activo ? 'Activo' : 'Inactivo' }}</td>
                                         <td>
                                             <div style="display: flex; justify-content: space-between;">
+                                                <form method="POST"
+                                                    action="{{ route('miembro/home/estado/', $miembro->user_id) }}">
+                                                    @csrf
+                                                    <button type="submit" class="btn btn-secondary"
+                                                        data-toggle="tooltip" data-placement="top"
+                                                        title="Cambia el estado"><i
+                                                            class="zmdi zmdi-swap"></i></button>
+                                                </form>
                                                 <a href="{{ url('miembro/home/edit/' . $miembro->user_id) }}"
                                                     class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
                                                 <form action="{{ url('miembro/home/' . $miembro->user_id) }}"

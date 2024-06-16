@@ -17,7 +17,7 @@ use App\Http\Controllers\MiembroController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 Auth::routes();
@@ -25,8 +25,6 @@ Auth::routes();
 Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
 Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
 Route::get('/miembro/home/buscar', [MiembroController::class, 'buscar'])->name('miembro/home/buscar');
-
-Route::get('/catalogo', [App\Http\Controllers\HomeController::class, 'catalogoLibros'])->name('catalogo');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/profesores', [App\Http\Controllers\ProfesorController::class, 'verProfesores'])->name('home/profesores');
@@ -41,6 +39,7 @@ Route::prefix('profesor')->group(function () {
     Route::resource('/home', ProfesorController::class)->except([
         'index'
     ]);
+    Route::post('/home/estado/{id}', [ProfesorController::class, 'cambiarEstado'])->name('profesor/home/estado/');
     Route::post('/home/{id}', [ProfesorController::class, 'update'])->name('profesor/home/');
     Route::get('/home/edit/{id}', [ProfesorController::class, 'edit'])->name('profesor/home/edit/');
 });
@@ -52,13 +51,14 @@ Route::prefix('bibliotecario')->group(function () {
     Route::post('/home/estado/{id}', [BibliotecarioController::class, 'cambiarEstado'])->name('bibliotecario/home/estado/');
     Route::post('/home/{id}', [BibliotecarioController::class, 'update'])->name('bibliotecario/home/');
     Route::get('/home/edit/{id}', [BibliotecarioController::class, 'edit'])->name('bibliotecario/home/edit/');
-   // Route::get('/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
+   
 });
 
 Route::prefix('miembro')->group(function () {
     Route::resource('/home', MiembroController::class)->except([
         'index'
     ]);
+    Route::post('/home/estado/{id}', [MiembroController::class, 'cambiarEstado'])->name('miembro/home/estado/');
     Route::post('/home/{id}', [MiembroController::class, 'update'])->name('miembro/home/');
     Route::get('/home/edit/{id}', [MiembroController::class, 'edit'])->name('miembro/home/edit/');
     

@@ -82,7 +82,7 @@
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="group-material">
                                         <input name="telefono" type="tel" class="material-control tooltips-general"
-                                            placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip"
+                                            placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip" pattern="[0-9\-]+$"
                                             data-placement="top" title="Ingrese su numero de telefono" value="{{$miembro->TELEFONO}}">
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
@@ -92,20 +92,23 @@
                                 
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="group-material">
-                                        <input name="tipo_identificacion" type="text"
-                                            class="material-control tooltips-general" placeholder="Tipo de identificación"
-                                            required="" data-toggle="tooltip" data-placement="top"
-                                            title="Ingresa el tipo de identificación" value="{{$miembro->DOC_IDENTIFICACION}}">
+                                        <select name="tipo_identificacion" class="material-control tooltips-general" required="" data-toggle="tooltip" data-placement="top">
+                                            <option value="">-- Selecciona el tipo de identificación --</option>
+                                            <option value="dui" {{ $miembro->DOC_IDENTIFICACION == 'dui' ? 'selected' : '' }}>DUI</option>
+                                            <option value="pasaporte" {{ $miembro->DOC_IDENTIFICACION == 'pasaporte' ? 'selected' : '' }}>Pasaporte</option>
+                                            <option value="licencia" {{ $miembro->DOC_IDENTIFICACION == 'licencia' ? 'selected' : '' }}>Licencia</option>
+                                            <option value="otro" {{ $miembro->DOC_IDENTIFICACION == 'otro' ? 'selected' : '' }}>Otro</option>
+                                        </select>
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
-                                        <label>Tipo de identificación</label>
+                                        
                                     </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-6">
                                     <div class="group-material">
                                         <input name="num_identificacion" type="text"
                                             class="material-control tooltips-general"
-                                            placeholder="Número de identificación" required="" data-toggle="tooltip"
+                                            placeholder="Número de identificación" required="" data-toggle="tooltip" pattern="[0-9\-]+$"
                                             data-placement="top" title="Ingresa el número de identificación" value="{{$miembro->NUM_DOC_IDENTIFICACION}}">
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
