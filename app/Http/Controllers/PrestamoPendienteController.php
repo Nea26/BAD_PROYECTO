@@ -51,15 +51,31 @@ class PrestamoPendienteController extends Controller
     public function devolver(PrestamoMiembro $prestamo)
     {
         $hoy = Carbon::now();
+        $valorMulta=7;
+         $fechaDevolucion = $prestamo->fecha_devolucion;
+         $timestamp = strtotime($fechaDevolucion);
+         $fechaDevolucionCarbon = Carbon::createFromTimestamp($timestamp);
+         $isDistinta = $fechaDevolucionCarbon->day != Carbon::now()->day ||
+              $fechaDevolucionCarbon->month != Carbon::now()->month ||
+              $fechaDevolucionCarbon->year != Carbon::now()->year;
+         if ($isDistinta) {
+             $diferenciaEnDias = Carbon::parse($fechaDevolucion)->diffInDays(Carbon::now());
+    $diferenciaEnDias=$diferenciaEnDias+1;
+    $multa = $diferenciaEnDias * $valorMulta;
+         }else{
+            $multa=0;
+
+         }
+    
         
-        return view('devolverPrestamo',['prestamo' => $prestamo,'hoy' => $hoy]);
+        return view('devolverPrestamo',['prestamo' => $prestamo,'hoy' => $hoy,'multa' => $multa]);
 
     }
     public function devolucion(Request $request, PrestamoMiembro $prestamo)
     {
         $prestamo->fecha_devuelto = $request->fechaDevuelto;
         $prestamo->devuelto = 1;
-       
+        $prestamo->id_multa = $request->multa;
         $prestamo->save();
 
         return redirect()->route('prestamoPendiente.index');
