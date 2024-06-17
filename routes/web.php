@@ -26,7 +26,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-//Auth::routes();
+Auth::routes();
 
 Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
 Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
