@@ -46,6 +46,7 @@ class PrestamoController extends Controller
     }
     public function update(Request $request, PrestamoMiembro $prestamo)
     {
+        //uso de carbon
         $prestamo->id_ejemplar = $request->codigo;
         $prestamo->carnet_miembro = $request->carnet;
         $prestamo->fecha_prestamo = $request->fechaPrestamo;
