@@ -36,7 +36,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="carnet" type="text" value="{{old('carnet',$prestamo->carnet_miembro)}}" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" pattern="[0-9]{1,20}"  required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el título o nombre del libro">
+                                <input name="carnet" type="text" value="{{old('carnet',$prestamo->carnet_miembro)}}" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" pattern="[0-9]{1,20}"  required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el carnet del que solicita el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Carnet</label>
