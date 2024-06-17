@@ -10,7 +10,7 @@
             <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
                 <li><a href="prestamo.html">Todos los préstamos</a></li>
                 <li class="active"><a href="prestamospendientes.html">Devoluciones pendientes</a></li>
-                <li><a href="reservaciones.html">Reservaciones</a></li>
+                <li><a href="reservaciones">Reservaciones</a></li>
             </ul>
         </div>
         <div class="container-fluid"  style="margin: 50px 0;">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             @foreach ($prestamos as $prestamo)
-            @if($prestamo->devuelto == 0)
+            @if($prestamo->devuelto == 0 && $prestamo->aprobado == 1)
             <div class="table-responsive">
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">

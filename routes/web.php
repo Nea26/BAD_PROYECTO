@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ReservaController;
+
 use App\Http\Controllers\UsuariosRegistroController;
 use App\Http\Controllers\ProfesorController;
 use App\Http\Controllers\BibliotecarioController;
@@ -92,15 +94,17 @@ Route::delete('/prestamoPendiente/{prestamo}', [PrestamoPendienteController::cla
 Route::get('/prestamoPendiente/{prestamo}/devolver', [PrestamoPendienteController::class, 'devolver'])->name('prestamoPendiente.devolver');
 Route::patch('/prestamoPendiente/{prestamo}/devolver', [PrestamoPendienteController::class, 'devolucion'])->name('prestamoPendiente.devolucion');
 
-Route::get('/reservaciones.html', function () {
-    return view('reservaciones');
-});
+//Reservas
+Route::get('/reservaciones', [ReservaController::class, 'index'])->name('reserva.index');
+Route::get('/CrearReserva', [ReservaController::class, 'create'])->name('reserva.create');
+Route::post('/CrearReserva', [ReservaController::class, 'store'])->name('reserva.store');
+Route::get('/reserva/{prestamo}', [ReservaController::class, 'show'])->name('reserva.show');
+Route::get('/reserva/{prestamo}/editar', [ReservaController::class, 'edit'])->name('reserva.edit');
+Route::patch('/reserva/{prestamo}', [ReservaController::class, 'update'])->name('reserva.update');
+Route::delete('/reserva/{prestamo}', [ReservaController::class, 'destroy'])->name('reserva.destroy');
+Route::get('/reserva/{prestamo}/aprobar', [ReservaController::class, 'aprobar'])->name('reserva.aprobar');
+Route::patch('/reserva/{prestamo}/aprobar', [ReservaController::class, 'aprobacion'])->name('reserva.aprobacion');
 
 Route::get('/reportes.html', function () {
     return view('reportes');
-});
-
-
-Route::get('/prueba', function () {
-    return DB::select('select * from PRESTAMOMIEMBRO');
 });
