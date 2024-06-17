@@ -5,7 +5,9 @@ use App\Models\PrestamoMiembro;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Random;
 use Carbon\Carbon;
+
 
 class PrestamoPendienteController extends Controller
 {
@@ -53,14 +55,9 @@ class PrestamoPendienteController extends Controller
         $hoy = Carbon::now();
         $valorMulta=7;
          $fechaDevolucion = $prestamo->fecha_devolucion;
-         $timestamp = strtotime($fechaDevolucion);
-         $fechaDevolucionCarbon = Carbon::createFromTimestamp($timestamp);
-         $isDistinta = $fechaDevolucionCarbon->day != Carbon::now()->day ||
-              $fechaDevolucionCarbon->month != Carbon::now()->month ||
-              $fechaDevolucionCarbon->year != Carbon::now()->year;
-         if ($isDistinta) {
+         if ($fechaDevolucion<$hoy) {
              $diferenciaEnDias = Carbon::parse($fechaDevolucion)->diffInDays(Carbon::now());
-    $diferenciaEnDias=$diferenciaEnDias+1;
+    //$diferenciaEnDias=$diferenciaEnDias+1;
     $multa = $diferenciaEnDias * $valorMulta;
          }else{
             $multa=0;
@@ -75,7 +72,11 @@ class PrestamoPendienteController extends Controller
     {
         $prestamo->fecha_devuelto = $request->fechaDevuelto;
         $prestamo->devuelto = 1;
-        $prestamo->id_multa = $request->multa;
+        if ($request->multa>0) {
+            $prestamo->monto_multa = $request->multa;
+            $prestamo->id_multa=random_int(1000, 9999);
+        }
+        
         $prestamo->save();
 
         return redirect()->route('prestamoPendiente.index');

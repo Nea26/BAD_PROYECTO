@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('id_ejemplar')->unsigned();
             $table->integer('id_multa')->unsigned()->nullable();
+            $table->integer('monto_multa')->unsigned()->nullable();
             $table->integer('id_bibliotecario')->unsigned()->nullable();
             $table->string('carnet_miembro');
             $table->date('fecha_prestamo')->nullable();
