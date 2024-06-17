@@ -38,7 +38,7 @@
                                 <input type="text" name="titulo" class="tooltips-general material-control"
                                     placeholder="Escribe aquí el título o nombre del libro" required="" maxlength="70"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="Escribe el título o nombre del libro" value="{{$libro->titulo}}">
+                                    title="Escribe el título o nombre del libro" value="{{old('titulo',$libro->titulo)}}">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Título</label>

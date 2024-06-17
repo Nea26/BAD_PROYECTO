@@ -63,7 +63,8 @@ class CatalogoController extends Controller
      */
     public function edit(Libro $libro): View
     {
-        return view('EditLibro',['Libro'=> $libro]);
+        dd($libro); 
+        //return view('EditLibro',['Libro'=> $libro]);
     }
 
     /**

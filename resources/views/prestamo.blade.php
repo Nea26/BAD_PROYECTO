@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Prestamos')
+@extends('layouts.base')
 @section('content')
 
 

@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Reservaciones')
+@extends('layouts.base')
 @section('content')
         <div class="container">
             <div class="page-header">

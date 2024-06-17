@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Devoluciones Pendientes')
+@extends('layouts.base')
 @section('content')
         <div class="container">
             <div class="page-header">

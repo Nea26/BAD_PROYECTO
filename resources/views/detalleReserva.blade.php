@@ -1,5 +1,4 @@
-@extends('appDetalle')
-@section('title', 'Detalle de Reserva')
+@extends('layouts.base')
 @section('content')
 
 

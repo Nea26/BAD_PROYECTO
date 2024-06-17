@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Agregar Prestamo')
+@extends('layouts.base')
 @section('content')
 
         <div class="container">

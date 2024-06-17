@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Agregar Reserva')
+@extends('layouts.base')
 @section('content')
 
         <div class="container">
