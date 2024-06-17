@@ -28,12 +28,15 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::resource('book', LibroController::class );
+Route::resource('catalogo', CatalogoController::class );
+
 Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'buscar'])->name('bibliotecario/home/buscar');
 Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
 Route::get('/miembro/home/buscar', [MiembroController::class, 'buscar'])->name('miembro/home/buscar');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home/profesores', [App\Http\Controllers\ProfesorController::class, 'verProfesores'])->name('home/profesores');
+Route::get('/home/profesores', [App\Http\Controllers\ProfesorController::class, 'verProfesores'])->name('home/profesores'); 
 Route::get('/home/miembros', [App\Http\Controllers\MiembroController::class, 'verMiembros'])->name('home/miembros');
 Route::get('/bibliotecario/pagination', [App\Http\Controllers\BibliotecarioController::class, 'pagination'])->name('/bibliotecario/pagination');
 Route::get('/profesor/pagination', [App\Http\Controllers\ProfesorController::class, 'pagination'])->name('/profesor/pagination');
