@@ -111,9 +111,7 @@
                             </div>
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
-                                    <input name="password" type="password" class="material-control tooltips-general"
-                                        placeholder="Contraseña" required="" maxlength="200"
-                                        data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                    <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Contraseña</label>
@@ -123,7 +121,7 @@
                                 <div class="group-material">
                                     <input name="password_confirmation" type="password"
                                         class="material-control tooltips-general" placeholder="Repite la contraseña"
-                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top"
+                                        required="" maxlength="200" data-toggle="tooltip" data-placement="top" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$"
                                         title="Repite la contraseña">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
@@ -225,11 +223,12 @@
                             <h4 class="modal-title text-center all-tittles">Ayuda del sistema</h4>
                         </div>
                         <div class="modal-body">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore dignissimos qui
-                            molestias
-                            ipsum officiis unde aliquid consequatur, accusamus delectus asperiores sunt. Quibusdam
-                            veniam
-                            ipsa accusamus error. Animi mollitia corporis iusto.
+                            En este espacio puedes registrar nuevos bibliotecarios en el sistema,
+                            para ello debes de llenar todos los campos del formulario con los datos
+                            correspondientes. Si deseas ver el listado de bibliotecarios registrados
+                            en el sistema, puedes hacer clic en el botón "Listado de bibliotecarios".
+                            <br><br>
+                            <strong>Nota:</strong> Todos los campos son obligatorios.
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-primary" data-dismiss="modal"><i

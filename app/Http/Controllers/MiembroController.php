@@ -25,7 +25,7 @@ class MiembroController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('home')->with('success', 'Eliminacion exitosa');
+        return redirect()->route('home/miembros')->with('success', 'Eliminacion exitosa');
     }
     public function search(Request $request)
     {
@@ -40,6 +40,15 @@ class MiembroController extends Controller
     {
         
     }
+     //Cambiar estado
+     public function cambiarEstado($id)
+     {
+         $user = User::find($id);
+         $user->activo= !$user->activo;
+         $user->save();
+         return redirect()->route('home/miembros')->with('success', 'Cambio de estado exitoso');
+     }
+     //Editar miembro
     public function edit($user_id)
     {
         $miembro = Miembro::where('user_id', $user_id)->first();
@@ -72,7 +81,7 @@ class MiembroController extends Controller
 
         $miembro->update($miembroData);
 
-        return redirect()->route('home')->with('success', 'Actualizacion exitosa');
+        return redirect()->route('home/miembros')->with('success', 'Actualizacion exitosa');
     }
     public function verMiembros(){
         

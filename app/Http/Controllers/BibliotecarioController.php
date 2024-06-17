@@ -30,9 +30,9 @@ class BibliotecarioController extends Controller
     //Cambiar estado
     public function cambiarEstado($id)
     {
-        $bibliotecario = Bibliotecario::find($id);
-        $bibliotecario->user->activo = !$bibliotecario->user->activo;
-        $bibliotecario->user->save();
+        $user = User::find($id);
+        $user->activo= !$user->activo;
+        $user->save();
         return redirect()->route('home')->with('success', 'Cambio de estado exitoso');
     }
     //Editar bibliotecario

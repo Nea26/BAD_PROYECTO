@@ -26,7 +26,7 @@ class ProfesorController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        return redirect()->route('home')->with('success', 'Eliminacion exitosa');
+        return redirect()->route('home/profesores')->with('success', 'Eliminacion exitosa');
     }
     public function search(Request $request)
     {
@@ -51,6 +51,15 @@ class ProfesorController extends Controller
             'profesores' => $profesores,
         ]);
     }
+    //Cambiar estado
+    public function cambiarEstado($id)
+    {
+        $user = User::find($id);
+        $user->activo= !$user->activo;
+        $user->save();
+        return redirect()->route('home/profesores')->with('success', 'Cambio de estado exitoso');
+    }
+    //Editar profesor
     public function edit($user_id)
     {
         $profesor = Profesor::where('user_id', $user_id)->first();
@@ -81,7 +90,7 @@ class ProfesorController extends Controller
         ];
 
         $profesor->update($profesorData);
-        return redirect()->route('home')->with('success', 'Actualizacion exitosa');
+        return redirect()->route('home/profesores')->with('success', 'Actualizacion exitosa');
     }
     //Buscar profesor
     public function buscar(Request $request)
