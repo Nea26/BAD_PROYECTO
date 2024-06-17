@@ -34,12 +34,11 @@
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
                         <div class="div-table-cell" style="width: 2%;">#</div>
-                        <div class="div-table-cell" style="width: 19%;">Nombre de libro</div>
-                        <div class="div-table-cell" style="width: 19%;">Nombre de usuario</div>
-                        <div class="div-table-cell" style="width: 10%;">Devuelto</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Solicitud</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
-                        <div class="div-table-cell" style="width: 10%;">F. Devuelto</div>
+                        <div class="div-table-cell" style="width: 15%;">Nombre de libro</div>
+                        <div class="div-table-cell" style="width: 10%;">Nombre de usuario</div>
+                        <div class="div-table-cell" style="width: 9%;">F. Solicitud</div>
+                        <div class="div-table-cell" style="width: 8%;">F. Entrega</div>
+                        <div class="div-table-cell" style="width: 8%;">F. Devuelto</div>
                         <div class="div-table-cell" style="width: 8%;">Eliminar</div>
                         <div class="div-table-cell" style="width: 8%;">Editar</div>
                         <div class="div-table-cell" style="width: 8%;">Ver Ficha</div>
@@ -52,25 +51,24 @@
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
                         <div class="div-table-cell" style="width: 2%;">{{$prestamo->id}}</div>
-                        <div class="div-table-cell" style="width: 19%;">{{$prestamo->id_ejemplar}}</div>
-                        <div class="div-table-cell" style="width: 19%;">{{$prestamo->carnet_miembro}}</div>
-                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->devuelto}}</div>
-                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_prestamo}}</div>
-                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_devolucion}}</div>
-                        <div class="div-table-cell" style="width: 10%;">{{$prestamo->fecha_devuelto}}</div>
+                        <div class="div-table-cell" style="width: 20%;">{{$prestamo->id_ejemplar}}</div>
+                        <div class="div-table-cell" style="width: 12%;">{{$prestamo->carnet_miembro}}</div>
+                        <div class="div-table-cell" style="width: 14%;">{{$prestamo->fecha_prestamo}}</div>
+                        <div class="div-table-cell" style="width: 9%;">{{$prestamo->fecha_devolucion}}</div>
+                        <div class="div-table-cell" style="width: 12%;">{{$prestamo->fecha_devuelto}}</div>
                         <form action="{{route('prestamo.destroy',$prestamo)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                        <div class="div-table-cell" style="width: 6%;">
+                        <div class="div-table-cell" style="width: 1%;">
                             <button  class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
                         </div>
                         </form>
-                        <div class="div-table-cell" style="width: 6%;">
+                        <div class="div-table-cell" style="width: 12%;">
                             <a href="{{route('prestamo.edit', $prestamo)}}">
                             <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
                         </i></a>
                         </div>
-                        <div class="div-table-cell" style="width: 6%;">
+                        <div class="div-table-cell" style="width: 10%;">
                             <a href="{{url('prestamo/'.$prestamo->id)}}">
                             <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
                         </i></a>

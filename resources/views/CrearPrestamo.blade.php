@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el título o nombre del libro">
+                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" required="" maxlength="7" data-toggle="tooltip" data-placement="top" title="Escribe el codigo del que solicita el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Carnet</label>
@@ -44,7 +44,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <label>Fecha de prestamo</label>
                             <div class="group-material">
-                                <input name="fechaPrestamo" type="date" class="tooltips-general material-control" readonly value={{$hoy}} placeholder="Escribe aquí la fecha en el que se realizo el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del autor del libro">
+                                <input name="fechaPrestamo" type="date" class="tooltips-general material-control" readonly value={{$hoy}} placeholder="Escribe aquí la fecha en el que se realizo el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Fecha en la que se realizo el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 
@@ -53,7 +53,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <label>Fecha de devolución</label>
                             <div class="group-material">
-                                <input name="fechaDevolucion" type="date" class="tooltips-general material-control" readonly value={{$diaDevolucion}} placeholder="Escribe aquí el dia en que se devolvera el libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el país del libro">
+                                <input name="fechaDevolucion" type="date" class="tooltips-general material-control" readonly value={{$diaDevolucion}} placeholder="Escribe aquí el dia en que se devolvera el libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Fecha en la que se acordo la devolucion">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                             </div>

@@ -66,6 +66,13 @@
                         <br />
                         </div>
                         </div>
+                        <div class="col-xs-12 col-sm-6" id="extender">
+                            <div class="group-material">
+                        <input name="extenso" type="checkbox" id="prorroga"  placeholder="Marca si el libro ha sido devuelto" value="first_checkbox" title="Marca si el libro ha sido devuelto" />
+                            ¿Extender prestamo 5 dias?
+                        <br />
+                        </div>
+                        </div>
 
                        <div class="col-xs-12">
                             <p class="text-center">
@@ -82,15 +89,19 @@
             function showContent() {
                 element2 = document.getElementById("fPrestamo");
                 element3 = document.getElementById("fDevolucion");
+                element4 = document.getElementById("extender");
                 check = document.getElementById("check");
                 
                 if (check.checked) {
                     element2.style.display='block';
                     element3.style.display='block';
+                    element4.style.display='block';
                 }
                 else {
                     element2.style.display='none';
                     element3.style.display='none';
+                    element4.style.display='none';
+                    document.getElementById("prorroga").checked = false;
                     
                 }
             }

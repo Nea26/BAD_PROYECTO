@@ -9,7 +9,7 @@
             <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
                 <li><a href="prestamo.html">Todos los préstamos</a></li>
                 <li><a href="prestamospendientes.html">Devoluciones pendientes</a></li>
-                <li class="active"><a href="reservaciones.html">Reservaciones</a></li>
+                <li class="active"><a href="reservaciones">Reservaciones</a></li>
             </ul>
         </div>
          <div class="container-fluid" style="margin: 50px 0;">

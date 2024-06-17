@@ -41,6 +41,9 @@ class PrestamoPendienteController extends Controller
             $prestamo->fecha_prestamo = null;
             $prestamo->fecha_devolucion = null;
         }
+        if($request->extenso){
+            $prestamo->fecha_devolucion=Carbon::parse($request->fechaDevolucion)->addDays(5);
+        }
         $prestamo->save();
 
         return redirect()->route('prestamoPendiente.index');

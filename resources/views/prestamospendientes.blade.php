@@ -29,13 +29,12 @@
                     <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
                         <div class="div-table-cell" style="width: 1%;">#</div>
                         <div class="div-table-cell" style="width: 15%;">Nombre de libro</div>
-                        <div class="div-table-cell" style="width: 6%;">Nombre de usuario</div>
-                        <div class="div-table-cell" style="width: 6%;">Devuelto</div>
-                        <div class="div-table-cell" style="width: 6%;">F. Solicitud</div>
+                        <div class="div-table-cell" style="width: 10%;">Nombre de usuario</div>
+                        <div class="div-table-cell" style="width: 13%;">F. Solicitud</div>
                         <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
                         <div class="div-table-cell" style="width: 8%;">Eliminar</div>
                         <div class="div-table-cell" style="width: 8%;">Recibir</div>
-                        <div class="div-table-cell" style="width: 8%;">Editar</div>
+                        <div class="div-table-cell" style="width: 8%;">Editar/Extender prestamo</div>
                         <div class="div-table-cell" style="width: 8%;">Ver Ficha</div>
                     </div>
                 </div>
@@ -48,27 +47,26 @@
                         <div class="div-table-cell" style="width: 1%;">{{$prestamo->id}}</div>
                         <div class="div-table-cell" style="width: 19%;">{{$prestamo->id_ejemplar}}</div>
                         <div class="div-table-cell" style="width: 10%;">{{$prestamo->carnet_miembro}}</div>
-                        <div class="div-table-cell" style="width: 7%;">{{$prestamo->devuelto}}</div>
-                        <div class="div-table-cell" style="width: 8%;">{{$prestamo->fecha_prestamo}}</div>
-                        <div class="div-table-cell" style="width: 12%;">{{$prestamo->fecha_devolucion}}</div>
+                        <div class="div-table-cell" style="width: 20%;">{{$prestamo->fecha_prestamo}}</div>
+                        <div class="div-table-cell" style="width: 8%;">{{$prestamo->fecha_devolucion}}</div>
                         <form action="{{route('prestamoPendiente.destroy',$prestamo)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                        <div class="div-table-cell" style="width: 1%;">
+                        <div class="div-table-cell" style="width: 5%;">
                             <button  class="btn btn-danger"><i class="zmdi zmdi-delete"></i></button>
                         </div>
                         </form>
-                            <div class="div-table-cell" style="width: 12%;">
+                            <div class="div-table-cell" style="width: 10%;">
                                 <a href="{{route('prestamoPendiente.devolver', $prestamo)}}">
                                 <button class="btn btn-success"><i class="zmdi zmdi-time-restore"></i></button>
                                 </a>
                             </div>
-                        <div class="div-table-cell" style="width: 8%;">
+                        <div class="div-table-cell" style="width: 10%;">
                             <a href="{{route('prestamoPendiente.edit', $prestamo)}}">
                             <button class="btn btn-info"><i class="zmdi zmdi-file-text"></i></button>
                         </i></a>
                         </div>
-                        <div class="div-table-cell" style="width: 12%;">
+                        <div class="div-table-cell" style="width: 9%;">
                             <a href="{{url('prestamo/'.$prestamo->id)}}">
                             <button class="btn btn-info" ><i class="zmdi zmdi-file-text"></i></button>
                             </a>
