@@ -1,5 +1,4 @@
-@extends('app')
-@section('title', 'Agregar Prestamo')
+@extends('layouts.base')
 @section('content')
 
         <div class="container">
@@ -43,19 +42,20 @@
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
+                            <label>Fecha de prestamo</label>
                             <div class="group-material">
-                                <input name="fechaPrestamo" type="date" class="tooltips-general material-control" placeholder="Escribe aquí la fecha en el que se realizo el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del autor del libro">
+                                <input name="fechaPrestamo" type="date" class="tooltips-general material-control" readonly value={{$hoy}} placeholder="Escribe aquí la fecha en el que se realizo el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el nombre del autor del libro">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Fecha de prestamo</label>
+                                
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
+                            <label>Fecha de devolución</label>
                             <div class="group-material">
-                                <input name="fechaDevolucion" type="date" class="tooltips-general material-control" placeholder="Escribe aquí el dia en que se devolvera el libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el país del libro">
+                                <input name="fechaDevolucion" type="date" class="tooltips-general material-control" readonly value={{$diaDevolucion}} placeholder="Escribe aquí el dia en que se devolvera el libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe el país del libro">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Fecha de devolución</label>
                             </div>
                         </div>
 

@@ -42,7 +42,7 @@
                             <div class="col-xs-12">
                                 <div class="group-material">
                                     <input name='dui' type="text" class="material-control tooltips-general"
-                                        placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9-]{1,10}"
+                                        placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9\-]{1,10}"
                                         required="" maxlength="10" data-toggle="tooltip" data-placement="top"
                                         title="Solamente números y guiones, 10 dígitos" value="{{$profesor->DUI}}">
                                     <span class="highlight"></span>
@@ -78,7 +78,7 @@
                             <div class="col-xs-12 col-sm-6">
                                 <div class="group-material">
                                     <input name='telefono' type="tel" class="material-control tooltips-general"
-                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip"
+                                        placeholder="Teléfono" required="" maxlength="15" data-toggle="tooltip" pattern="[0-9\-]+$"
                                         data-placement="top" title="Ingrese su numero de telefono" value="{{$profesor->TELEFONO}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>

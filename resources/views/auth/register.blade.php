@@ -56,9 +56,17 @@
               <h1 class="all-tittles">Sistema bibliotecario <small> Registrate</small></h1>
             </div>
         </div>
+        @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="conteiner-fluid">
             <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
-                <li role="presentation"><a  id="mostrarBiblio">Bibliotecario</a></li>
                 <li role="presentation">
                     <a id="mostrarProfesor">Profesor</a>
                 </li>
@@ -76,15 +84,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Miembro</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
+        
         <div class="container-fluid">
             <div class="container-flat-form">
                 <div class="title-flat-form title-flat-blue">Registrar un nuevo Miembro</div>
@@ -128,7 +128,8 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="telefono" type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
+                                <input name="telefono" type="tel" class="material-control tooltips-general"
+                                 placeholder="Teléfono"  required="" maxlength="15" pattern="[0-9\-]+$" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Teléfono</label>
@@ -137,15 +138,21 @@
                         <input type="hidden" name="role_id" value="2">
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="tipo_identificacion" type="text" class="material-control tooltips-general" placeholder="Tipo de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el tipo de identificación">
+                                <select name="tipo_identificacion" class="material-control tooltips-general" required="" data-toggle="tooltip" data-placement="top" >
+                                    <option value="">-- Selecciona el tipo de identificación --</option>
+                                    <option value="dui">DUI</option>
+                                    <option value="pasaporte">Pasaporte</option>
+                                    <option value="licencia">Licencia</option>
+                                    <option value="otro">Otro</option>
+                                </select>
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Tipo de identificación</label>
+                                
                             </div>
                             </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="num_identificacion" type="text" class="material-control tooltips-general" placeholder="Número de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el número de identificación">
+                                <input name="num_identificacion" type="text" class="material-control tooltips-general" pattern="[0-9\-]+$" placeholder="Número de identificación" required="" data-toggle="tooltip" data-placement="top" title="Ingresa el número de identificación">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Número de identificación</label>
@@ -172,7 +179,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Contraseña</label>
@@ -181,11 +188,10 @@
                         <input type="hidden" name="tipo" value="miembro">
                         <div class="col-xs-12 col-sm-6">
                            <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
+                                <input name="password_confirmation" type="password" class="material-control tooltips-general" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Repetir contraseña</label>
-                           </div>
+                                <label>Repetir contraseña</label>                           </div>
                         </div>
                        <div class="col-xs-12">
                             <p class="text-center">
@@ -209,16 +215,7 @@
                 </div>
             </div>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Profesor</li>
-                      
-                    </ol>
-                </div>
-            </div>
-        </div>
+        
         
         <div class="container-fluid">
             <div class="container-flat-form">
@@ -232,7 +229,7 @@
                         <input type="hidden" name="tipo" value="profesor">
                         <div class="col-xs-12">
                             <div class="group-material">
-                                <input name='dui' type="text" class="material-control tooltips-general" placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9-]{1,10}" required="" maxlength="10" data-toggle="tooltip" data-placement="top" title="Solamente números y guiones, 10 dígitos">
+                                <input name='dui' type="text" class="material-control tooltips-general" placeholder="Escribe aquí el número de DUI del docente" pattern="[0-9\-]{1,10}" required="" maxlength="10" data-toggle="tooltip" data-placement="top" title="Solamente números y guiones, 10 dígitos">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Número de DUI</label>
@@ -257,7 +254,7 @@
                         <input type="hidden" name="role_id" value="3">
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name='telefono' type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
+                                <input name='telefono' type="tel" class="material-control tooltips-general" placeholder="Teléfono"  required="" maxlength="15" pattern="[0-9\-]+$" data-toggle="tooltip" data-placement="top" title="Ingrese su numero de telefono">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Teléfono</label>
@@ -280,7 +277,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
+                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" data-placement="top" title="Escribe una contraseña de minimo 8 digitos, incluyendo una mayuscula, un simbolo , una minuscula y empezando con una letra.">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Contraseña</label>
@@ -289,7 +286,7 @@
                         
                         <div class="col-xs-12 col-sm-6">
                            <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
+                                <input name="password_confirmation" type="password" pattern="^(?=.*[A-Z])(?=.*[!@#$&*])[A-Za-z].{7,199}$" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Repetir contraseña</label>
@@ -298,7 +295,7 @@
                        <div class="col-xs-12">
                             <p class="text-center">
                                 <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
-                                <button href="{route('catalogo')}" type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
+                                <button href="{route('home')}" type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
                             </p> 
                         </div>
                     </div>
@@ -306,100 +303,7 @@
             </div>
         </div>
     </div>
-        <div id="registrarBibliotecario" style="display: none;">
-        <div  class="container-fluid"  style="margin: 50px 0;">
-            <div class="row">
-                <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="assets/img/user01.png" alt="user" class="img-responsive center-box" style="max-width: 110px;">
-                </div>
-                <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-                    Bienvenido a la sección para registrarse como bibliotecario en el sistema, debes de llenar todos los campos del siguiente formulario para registrarte
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-xs-12 lead">
-                    <ol class="breadcrumb">
-                      <li class="active">Nuevo Bibliotecario</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-        <div class="container-fluid">
-            <div class="container-flat-form">
-                <div class="title-flat-form title-flat-blue">Registrar un nuevo bibliotecario</div>
-                <form class="form-padding" action="{{route('register')}}" method="POST">
-                    @csrf
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Datos básicos</legend><br>
-                        </div>
-                        <div class="col-xs-12 ">
-                            <div class="group-material">
-                                <input name="nombre" type="text" class="material-control tooltips-general" placeholder="Nombres" required="" maxlength="70" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip" data-placement="top" title="Escribe tu nombre">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Nombres</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12">
-                            <div class="group-material">
-                                 <input name="apellido" type="text" class="material-control tooltips-general" placeholder="Apellidos" required="" maxlength="70"  pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip" data-placement="top" title="Escribe tus apellidos">
-                                 <span class="highlight"></span>
-                                 <span class="bar"></span>
-                                 <label>Apellidos</label>
-                            </div>
-                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="group-material">
-                                <input name="email" type="email" class="material-control tooltips-general" placeholder="E-mail"  maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe tu email">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Email</label>
-                            </div>
-                        </div>
-                        
-                        <input type="hidden" name="role_id" value="1"> 
-                        <div class="col-xs-12">
-                            <legend><i class="zmdi zmdi-lock"></i> &nbsp; Datos de la cuenta</legend><br>
-                        </div>
-                        <div class="col-xs-12">
-                           <div class="group-material">
-                                <input name="name" type="text" class="material-control tooltips-general input-check-user" placeholder="Nombre de usuario" required="" maxlength="20" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]{1,20}" data-toggle="tooltip" data-placement="top" title="Escribe un nombre de usuario sin espacios, que servira para iniciar sesión">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Nombre de usuario</label>
-                           </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="group-material">
-                                <input name="password" type="password" class="material-control tooltips-general" placeholder="Contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Escribe una contraseña">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Contraseña</label>
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-6">
-                           <div class="group-material">
-                                <input name="password_confirmation" type="password" class="material-control tooltips-general" placeholder="Repite la contraseña" required="" maxlength="200" data-toggle="tooltip" data-placement="top" title="Repite la contraseña">
-                                <span class="highlight"></span>
-                                <span class="bar"></span>
-                                <label>Repetir contraseña</label>
-                           </div>
-                        </div>
-                        <input type="hidden" name="tipo" value="bibliotecario">
-                       <div class="col-xs-12">
-                            <p class="text-center">
-                                <button type="reset" class="btn btn-info" style="margin-right: 20px;"><i class="zmdi zmdi-roller"></i> &nbsp;&nbsp; Limpiar</button>
-                                <button href="{route('home')}" type="submit" class="btn btn-primary"><i class="zmdi zmdi-floppy"></i> &nbsp;&nbsp; Guardar</button>
-                            </p> 
-                       </div>
-                   </div>
-                </form>
-            </div>
-        </div>
-        </div>
+        
         <div class="modal fade" tabindex="-1" role="dialog" id="ModalHelp">
           <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -436,7 +340,7 @@
             <div class="footer-copyright full-reset all-tittles">© BAD115_2024</div>
         </footer>
     </div>
-    <script src="{{asset('js/registro/registro.js')}}"></script>
+    <script src=/js/registro/registro.js></script>
 </body>
 
 </html>

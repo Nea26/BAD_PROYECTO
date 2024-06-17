@@ -1,5 +1,4 @@
-@extends('appEditarPrestamo')
-@section('title', 'Prestamos')
+@extends('layouts.base')
 @section('content')
 
         <div class="container">
@@ -47,7 +46,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <label>Fecha de prestamo</label>
                             <div class="group-material">
-                                <input name="fechaPrestamo" type="date" readonly value="{{old('fechaPrestamo',$prestamo->fecha_prestamo)}}" class="tooltips-general material-control" placeholder="Escribe aquí la fecha en el que se realizo el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe aquí la fecha en el que se realizo el prestamo">
+                                <input name="fechaPrestamo" type="date" readonly value="{{old('fechaPrestamo',$prestamo->fecha_prestamo)}}" class="tooltips-general material-control" placeholder="Fecha en el que se realizó el prestamo" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Fecha en el que se realizó el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 
@@ -56,7 +55,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <label>Fecha de devolución</label>
                             <div class="group-material">
-                                <input name="fechaDevolucion" type="date" readonly value="{{old('fechaDevolucion',$prestamo->fecha_devolucion)}}" class="tooltips-general material-control" placeholder="Escribe aquí el dia en que se devolvera el libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe aquí el dia en que se devolvera el libro">
+                                <input name="fechaDevolucion" type="date" readonly value="{{old('fechaDevolucion',$prestamo->fecha_devolucion)}}" class="tooltips-general material-control" placeholder="Dia en que se acordó la devolución del libro" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Dia en que se acordó la devolución el libro">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 
@@ -64,17 +63,18 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                        <input name="devuelto" type="checkbox" checked='checked'  onchange="javascript:showContent()" id="check"  placeholder="Marca si el libro ha sido devuelto" value="first_checkbox" title="Marca si el libro ha sido devuelto" />
+                        <input name="devuelto" type="checkbox"   id="check"  placeholder="Marca si el libro ha sido devuelto" required="" value="first_checkbox" title="Marca si el libro ha sido devuelto" />
                             ¿Devuelto?
                         <br />
                         </div>
                         </div>
                         <div class="col-xs-12 col-sm-6" id="content">
+                            <label>Fecha en que se devolvio</label>
                             <div class="group-material">
-                                <input name="fechaDevuelto" type="date" id="date"  class="tooltips-general material-control" placeholder="Escribe aquí el dia en que el libro ha sido devuelto" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Escribe aquí el dia en que el libro ha sido devuelto">
+                                <input name="fechaDevuelto" type="date" id="date" readonly  class="tooltips-general material-control" value={{$hoy}} placeholder="Dia en que el libro ha sido devuelto" required="" maxlength="50" data-toggle="tooltip" data-placement="top" title="Dia en que el libro ha sido devuelto">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
-                                <label>Fecha de devuelto</label>
+                               
                             </div>
                         </div>
 
@@ -89,30 +89,3 @@
             </div>
         </div>
         @endsection
-
-        <script type="text/javascript">
-            function showContent() {
-                element = document.getElementById("content");
-                check = document.getElementById("check");
-                if (check.checked) {
-                    element.style.display='block';
-                }
-                else {
-                    element.style.display='none';
-                    document.getElementById("date").value = "mm/dd/yyyy";
-                }
-            }
-        </script>
-                <script type="text/javascript">
-                    function DateReset() {
-                        date = document.getElementById("date");
-                        check = document.getElementById("check");
-                        if (check.checked) {
-                            
-                        }
-                        else{
-                            date.value = "mm/dd/yyyy";
-                        }
-                    
-                    }
-                </script>
