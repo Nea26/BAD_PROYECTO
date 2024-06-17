@@ -5,6 +5,7 @@ use App\Models\PrestamoMiembro;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class ReservaController extends Controller
@@ -48,7 +49,9 @@ class ReservaController extends Controller
     }
     public function aprobar(PrestamoMiembro $prestamo)
     {
-        return view('aprobarReserva',['prestamo' => $prestamo]);
+        $hoy = Carbon::now();
+        $diaDevolucion=Carbon::now()->addDays(5);
+        return view('aprobarReserva',['prestamo' => $prestamo,'hoy' => $hoy,'diaDevolucion' => $diaDevolucion]);
     }
     public function aprobacion(Request $request, PrestamoMiembro $prestamo)
     {

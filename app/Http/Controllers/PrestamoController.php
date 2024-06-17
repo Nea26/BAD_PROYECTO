@@ -7,6 +7,7 @@ use App\Models\PrestamoMiembro;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PrestamoController extends Controller
 {
@@ -23,7 +24,9 @@ class PrestamoController extends Controller
     }
     public function create()
     {
-        return view('CrearPrestamo');
+        $hoy = Carbon::now();
+        $diaDevolucion=Carbon::now()->addDays(5);
+        return view('CrearPrestamo',['hoy' => $hoy,'diaDevolucion' => $diaDevolucion]);
     }
     public function store(Request $request){
         $prestamo = new PrestamoMiembro();
@@ -43,10 +46,19 @@ class PrestamoController extends Controller
     }
     public function update(Request $request, PrestamoMiembro $prestamo)
     {
+        //uso de carbon
         $prestamo->id_ejemplar = $request->codigo;
         $prestamo->carnet_miembro = $request->carnet;
         $prestamo->fecha_prestamo = $request->fechaPrestamo;
         $prestamo->fecha_devolucion = $request->fechaDevolucion;
+        $prestamo->fecha_devuelto = $request->fechaDevuelto;
+        if($request->devuelto){
+            $prestamo->devuelto=1;
+        }else{
+            $prestamo->devuelto=0;
+            $prestamo->fecha_devuelto = null;
+
+        }
         $prestamo->save();
 
         return redirect()->route('prestamo.index');

@@ -5,6 +5,7 @@ use App\Models\PrestamoMiembro;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class PrestamoPendienteController extends Controller
 {
@@ -21,7 +22,7 @@ class PrestamoPendienteController extends Controller
         return view('detallePrestamo',['prestamo' => $prestamo]);
     }
     public function edit(PrestamoMiembro $prestamo)
-    {
+    {   
         return view('editarPrestamoPendiente',['prestamo' => $prestamo]);
         
     }
@@ -31,6 +32,13 @@ class PrestamoPendienteController extends Controller
         $prestamo->carnet_miembro = $request->carnet;
         $prestamo->fecha_prestamo = $request->fechaPrestamo;
         $prestamo->fecha_devolucion = $request->fechaDevolucion;
+        if($request->devuelto){
+            $prestamo->aprobado = 1;}
+        else{
+            $prestamo->aprobado = 0;
+            $prestamo->fecha_prestamo = null;
+            $prestamo->fecha_devolucion = null;
+        }
         $prestamo->save();
 
         return redirect()->route('prestamoPendiente.index');
@@ -42,7 +50,9 @@ class PrestamoPendienteController extends Controller
     }
     public function devolver(PrestamoMiembro $prestamo)
     {
-        return view('devolverPrestamo',['prestamo' => $prestamo]);
+        $hoy = Carbon::now();
+        
+        return view('devolverPrestamo',['prestamo' => $prestamo,'hoy' => $hoy]);
 
     }
     public function devolucion(Request $request, PrestamoMiembro $prestamo)
