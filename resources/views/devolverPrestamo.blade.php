@@ -61,13 +61,6 @@
                                 
                             </div>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
-                            <div class="group-material">
-                        <input name="devuelto" type="checkbox"   id="check"  placeholder="Marca si el libro ha sido devuelto" required="" value="first_checkbox" title="Marca si el libro ha sido devuelto" />
-                            ¿Devuelto?
-                        <br />
-                        </div>
-                        </div>
                         <div class="col-xs-12 col-sm-6" id="content">
                             <label>Fecha en que se devolvio</label>
                             <div class="group-material">
@@ -77,6 +70,23 @@
                                
                             </div>
                         </div>
+                         <div class="col-xs-12 col-sm-6">
+                            <label>Multa</label>
+                            <div class="group-material">
+                                <input name="multa" type="text" readonly value="{{ $multa }}" class="tooltips-general material-control" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe aquí el carnet del que solicita el prestamo">
+                                <span class="highlight"></span>
+                                <span class="bar"></span>
+                                
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="group-material">
+                        <input name="devuelto" type="checkbox"   id="check"  placeholder="Marca si el libro ha sido devuelto" required="" value="first_checkbox" title="Marca si el libro ha sido devuelto" />
+                            ¿Devuelto?
+                        <br />
+                        </div>
+                        </div>
+                        
 
                        <div class="col-xs-12">
                             <p class="text-center">
