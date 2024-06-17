@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CatalogoController extends Controller
 {
@@ -16,7 +17,7 @@ class CatalogoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(): View
     {
         $libros = Libro::where('cantidad_disponible', '>', 0)->paginate(4);
         return view('catalogo',['libros'=>$libros]);
@@ -60,9 +61,9 @@ class CatalogoController extends Controller
      * @param  \App\Models\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function edit(Libro $libro)
+    public function edit(Libro $libro): View
     {
-        //
+        return view('EditLibro',['Libro'=> $libro]);
     }
 
     /**

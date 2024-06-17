@@ -13,7 +13,7 @@
                     <img src="assets/img/calendar_book.png" alt="calendar" class="img-responsive center-box" style="max-width: 110px;">
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
-                    Bienvenido a esta sección, aquí se muestran todos los préstamos de libros realizados hasta la fecha y que ya se entregaron satisfactoriamente
+                    Bienvenido a esta sección, aquí se muestran todos libros que se encuentran registrados en el sistema hasta la fecha.
                 </div>
             </div>
         </div>
