@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Pagination\Paginator;
 
 class CatalogoController extends Controller
 {
-     public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
     }
@@ -20,7 +22,7 @@ class CatalogoController extends Controller
     public function index(): View
     {
         $libros = Libro::where('cantidad_disponible', '>', 0)->paginate(4);
-        return view('catalogo',['libros'=>$libros]);
+        return view('catalogo', ['libros' => $libros]);
     }
 
     /**
@@ -63,7 +65,7 @@ class CatalogoController extends Controller
      */
     public function edit(Libro $libro): View
     {
-        dd($libro); 
+        dd($libro);
         //return view('EditLibro',['Libro'=> $libro]);
     }
 
@@ -88,5 +90,21 @@ class CatalogoController extends Controller
     public function destroy(Libro $libro)
     {
         //
+    }
+    //Buscar libros
+    public function buscar(Request $request)
+    {
+        Paginator::useBootstrap();
+        $libros = Libro::where('titulo', 'like', "%{$request->buscar_Libro}%")
+            ->orWhere('codigo_internacional', 'like', "%{$request->buscar_Libro}%")
+            ->orWhere('idioma', 'like', "%{$request->buscar_Libro}%")
+            ->orWhere('edicion', 'like', "%{$request->buscar_Libro}%")
+            ->orWhere('cantidad_disponible', 'like', "%{$request->buscar_Libro}%")
+            ->paginate(4);
+        if ($libros->isEmpty()) {
+            return response()->json(['status' => 'error', 'message' => 'No se encontraron libros con este parametro de busqueda.']);
+        } else {
+            return view('catalogo', compact('libros'));
+        }
     }
 }

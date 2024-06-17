@@ -20,6 +20,13 @@
 
         <div class="container-fluid">
             <h2 class="text-center all-tittles">Listado de Libros</h2>
+            <br> 
+            <div class="search-container">
+                <input type="text" class="mb-3 form-control" id="search_Libro" placeholder="Buscar libros...">
+            </div>
+            <br>
+
+            <div id="datos-libros">
             <div class="table-responsive">
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
@@ -59,4 +66,6 @@
             </div>
             {{$libros->links()}}
         </div>
+        </div>
+        @include('filtrado.busquedaLibros')
 @endsection
