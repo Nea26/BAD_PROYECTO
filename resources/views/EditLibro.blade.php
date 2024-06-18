@@ -9,7 +9,7 @@
         <div class="container-fluid" style="margin: 50px 0;">
             <div class="row">
                 <div class="col-xs-12 col-sm-4 col-md-3">
-                    <img src="assets/img/flat-book.png" alt="pdf" class="img-responsive center-box"
+                    <img src="/assets/img/flat-book.png" alt="pdf" class="img-responsive center-box"
                         style="max-width: 110px;">
                 </div>
                 <div class="col-xs-12 col-sm-8 col-md-8 text-justify lead">
@@ -27,8 +27,9 @@
                 </div>
                 @endif
                 <div class="title-flat-form title-flat-blue">Editar libro</div>
-                <form class="form-padding" action="{{route('book.store')}}" method="POST">
+                <form class="form-padding" action="{{route('book.update',$libro->id)}}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-xs-12">
                             <legend><i class="zmdi zmdi-account-box"></i> &nbsp; Información básica</legend><br>
@@ -38,7 +39,7 @@
                                 <input type="text" name="titulo" class="tooltips-general material-control"
                                     placeholder="Escribe aquí el título o nombre del libro" required="" maxlength="70"
                                     data-toggle="tooltip" data-placement="top"
-                                    title="Escribe el título o nombre del libro" value="{{old('titulo',$libro->titulo)}}">
+                                    title="Escribe el título o nombre del libro" value="{{$libro->titulo}}">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Título</label>
@@ -49,7 +50,7 @@
                                 <input type="text" name="codigo_internacional" class="tooltips-general material-control"
                                     placeholder="Escribe aquí el código correlativo del libro" pattern="[0-9]{1,20}"
                                     required="" maxlength="20" data-toggle="tooltip" data-placement="top"
-                                    title="Escribe el código correlativo del libro, solamente números">
+                                    title="Escribe el código correlativo del libro, solamente números" value="{{$libro->codigo_internacional}}">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Código internacional</label>
@@ -59,7 +60,7 @@
                             <div class="group-material">
                                 <input type="text" class="tooltips-general material-control"
                                     placeholder="Escribe aquí el autor del libro" required="" maxlength="70"
-                                    data-toggle="tooltip" data-placement="top"
+                                    data-toggle="tooltip" data-placement="top" 
                                     title="Escribe el nombre del autor del libro">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
@@ -70,7 +71,7 @@
                             <div class="group-material">
                                 <input type="text" name="idioma" class="tooltips-general material-control"
                                     placeholder="Escribe aquí el país del libro" required="" maxlength="50"
-                                    data-toggle="tooltip" data-placement="top" title="Escribe el país del libro">
+                                    data-toggle="tooltip" data-placement="top" title="Escribe el país del libro" value="{{$libro->idioma}}">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>idioma</label>
@@ -131,7 +132,7 @@
                             <div class="group-material">
                                 <input type="text" name="edicion" class="material-control tooltips-general"
                                     placeholder="Escribe aquí la edición del libro" required="" maxlength="50"
-                                    data-toggle="tooltip" data-placement="top" title="Edición del libro">
+                                    data-toggle="tooltip" data-placement="top" title="Edición del libro" value="{{$libro->edicion}}">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Edición</label>
@@ -141,7 +142,7 @@
                             <div class="group-material">
                                 <input type="text" name='cantidad_disponible' class="material-control tooltips-general"
                                     placeholder="Escribe aquí la cantidad de libros que registraras" required=" "
-                                    pattern="[0-9]{1,7}" maxlength="7" data-toggle="tooltip" data-placement="top"
+                                    pattern="[0-9]{1,7}" maxlength="7" data-toggle="tooltip" data-placement="top" value="{{$libro->cantidad_disponible}}"
                                     title="¿Cuántos libros registraras?">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>

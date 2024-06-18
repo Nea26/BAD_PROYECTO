@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Termwind\Components\Li;
 
 class LibroController extends Controller
 {
@@ -76,9 +77,11 @@ class LibroController extends Controller
      * @param  \App\Models\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Libro $libro)
+    public function update(Request $request, $id)
     {
-        //
+        $libro = Libro::find($id);
+        $libro->update($request->all());
+        return redirect()->route('catalogo.index')->with('success','Libro actualizado con exito!');
     }
 
     /**
@@ -87,8 +90,10 @@ class LibroController extends Controller
      * @param  \App\Models\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Libro $libro)
+    public function destroy($id)
     {
-        //
+        $libro = Libro::find($id);
+        $libro->delete();
+        return redirect()->route('catalogo.index')->with('success','Libro eliminado con exito!');
     }
 }

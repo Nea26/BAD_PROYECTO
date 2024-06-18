@@ -142,10 +142,11 @@ class CatalogoController extends Controller
      * @param  \App\Models\Libro  $libro
      * @return \Illuminate\Http\Response
      */
-    public function edit(Libro $libro): View
+    public function edit($id): View
     {
-        dd($libro);
-        //return view('EditLibro',['Libro'=> $libro]);
+        $libro = Libro::find($id);
+        
+        return view('EditLibro',['libro'=> $libro]);
     }
 
     /**

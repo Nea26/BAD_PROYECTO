@@ -59,3 +59,25 @@
         }
     });
 </script>
+<script>
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); // Siempre evita el envío del formulario inicialmente
+            const form = this; // Guarda el formulario para usarlo después en el callback de SweetAlert
+            Swal.fire({
+                title: '¿Estás seguro de eliminar este libro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar!',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit(); // Solo envía el formulario si el usuario confirma
+                }
+            });
+        });
+    });
+</script>
