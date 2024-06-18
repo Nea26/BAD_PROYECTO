@@ -51,7 +51,7 @@
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
                         <div class="div-table-cell" style="width: 2%;">{{$prestamo->id}}</div>
-                        <div class="div-table-cell" style="width: 20%;">{{$prestamo->id_ejemplar}}</div>
+                        <div class="div-table-cell" style="width: 20%;">{{$prestamo->libro->titulo}}</div>
                         <div class="div-table-cell" style="width: 12%;">{{$prestamo->carnet_miembro}}</div>
                         <div class="div-table-cell" style="width: 14%;">{{$prestamo->fecha_prestamo}}</div>
                         <div class="div-table-cell" style="width: 9%;">{{$prestamo->fecha_devolucion}}</div>

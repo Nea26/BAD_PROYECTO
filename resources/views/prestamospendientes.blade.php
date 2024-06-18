@@ -29,7 +29,7 @@
                     <div class="div-table-row div-table-row-list" style="background-color:#DFF0D8; font-weight:bold;">
                         <div class="div-table-cell" style="width: 1%;">#</div>
                         <div class="div-table-cell" style="width: 15%;">Nombre de libro</div>
-                        <div class="div-table-cell" style="width: 10%;">Nombre de usuario</div>
+                        <div class="div-table-cell" style="width: 10%;">Carnet</div>
                         <div class="div-table-cell" style="width: 13%;">F. Solicitud</div>
                         <div class="div-table-cell" style="width: 10%;">F. Entrega</div>
                         <div class="div-table-cell" style="width: 8%;">Eliminar</div>
@@ -45,7 +45,7 @@
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
                         <div class="div-table-cell" style="width: 1%;">{{$prestamo->id}}</div>
-                        <div class="div-table-cell" style="width: 19%;">{{$prestamo->id_ejemplar}}</div>
+                        <div class="div-table-cell" style="width: 19%;">{{$prestamo->libro->titulo}}</div>
                         <div class="div-table-cell" style="width: 10%;">{{$prestamo->carnet_miembro}}</div>
                         <div class="div-table-cell" style="width: 20%;">{{$prestamo->fecha_prestamo}}</div>
                         <div class="div-table-cell" style="width: 8%;">{{$prestamo->fecha_devolucion}}</div>

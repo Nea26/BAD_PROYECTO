@@ -50,7 +50,7 @@
                 <div class="div-table" style="margin:0 !important;">
                     <div class="div-table-row div-table-row-list">
                         <div class="div-table-cell" style="width: 6%;">{{$prestamo->id}}</div>
-                        <div class="div-table-cell" style="width: 22%;">{{$prestamo->id_ejemplar}}</div>
+                        <div class="div-table-cell" style="width: 22%;">{{$prestamo->libro->titulo}}</div>
                         <div class="div-table-cell" style="width: 22%;">{{$prestamo->carnet_miembro}}</div>
                         
                         <div class="div-table-cell" style="width: 18%;">{{$prestamo->created_at->format('Y-m-d')}}</div>

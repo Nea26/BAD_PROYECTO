@@ -75,7 +75,7 @@ Route::prefix('miembro')->group(function () {
 
 //Prestamo Miembros
 Route::get('/prestamo.html', [PrestamoController::class, 'index'])->name('prestamo.index');
-Route::get('/CrearPrestamo.html', [PrestamoController::class, 'create']);
+Route::get('/CrearPrestamo.html', [PrestamoController::class, 'create'])->name('prestamo.create');
 Route::post('/CrearPrestamo.html', [PrestamoController::class, 'store'])->name('prestamo.store');
 Route::get('/prestamo/{prestamo}', [PrestamoController::class, 'show']);
 Route::get('/prestamo/{prestamo}/editar', [PrestamoController::class, 'edit'])->name('prestamo.edit');

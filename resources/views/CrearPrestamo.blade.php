@@ -18,7 +18,7 @@
         </div>
         <div class="container-fluid">
             <div class="container-flat-form">
-                <div class="title-flat-form title-flat-blue">Nuevo Prestamo</div>
+                <div class="title-flat-form title-flat-blue">Nuevo Prestamo</div>                                          
                 <form method="POST" action="{{route('prestamo.store')}}" class="form-padding">
                     @csrf
                     <div class="row">
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" required="" maxlength="7" data-toggle="tooltip" data-placement="top" title="Escribe el codigo del que solicita el prestamo">
+                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" required="" maxlength="9" data-toggle="tooltip" data-placement="top" title="Escribe el codigo del que solicita el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Carnet</label>
