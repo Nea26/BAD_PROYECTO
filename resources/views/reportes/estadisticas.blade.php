@@ -118,46 +118,11 @@
 
                     </div>
                     
-                    <div class="page-header">
-                        <h2 class="all-tittles">libros <small>por categorías</small></h2>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h3 class="text-center all-tittles">libros por categorías año 2016</h3>
-                            <div class="table-responsive">
-                                <table class="table table-hover text-center">
-                                    <thead>
-                                        <tr class="success">
-                                            <th class="text-center">Categoría</th>
-                                            <th class="text-center">Código</th>
-                                            <th class="text-center">Total libros</th>
-                                            <th class="text-center">Porcentaje</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Nombre</td>
-                                            <td>Código categoría</td>
-                                            <td>0</td>
-                                            <td>0%</td>
-                                        </tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr class="info">
-                                            <th class="text-center"></th>
-                                            <th class="text-center">Total libros</th>
-                                            <th class="text-center">0</th>
-                                            <th class="text-center">0%</th>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </div>
-                            <a class="btn btn-primary" href="{{route('reportes.pdf')}}">
-                                <i class="zmdi zmdi-file-text"></i> Generar Reporte
-                            </a>
-                        </div>
-                    </div>
+                    
                 </div>
+                <a class="btn btn-primary" href="{{route('reportes.pdf')}}">
+                    <i class="zmdi zmdi-file-text"></i> Generar Reporte
+                </a>
             </div>
             
         </div>

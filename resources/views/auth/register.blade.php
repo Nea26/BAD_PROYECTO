@@ -65,6 +65,11 @@
         </ul>
     </div>
 @endif
+@if($errors->has('custom_error'))
+    <div class="alert alert-danger">
+        {{ $errors->first('custom_error') }}
+    </div>
+@endif
         <div class="conteiner-fluid">
             <ul class="nav nav-tabs nav-justified"  style="font-size: 17px;">
                 <li role="presentation">

@@ -32,7 +32,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected function redirectTo(){
+    protected function redirectTo()
+    {
         return route('catalogo.index');
     }
 
@@ -45,7 +46,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-    
+
 
     /**
      * Get a validator for an incoming registration request.
@@ -61,7 +62,8 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nombre' => ['required', 'string', 'max:255'],
             'apellido' => ['required', 'string', 'max:255'],
-            
+            'fecha_nac' => ['required', 'date', 'before:-12 years'],
+
         ]);
     }
 
@@ -81,6 +83,7 @@ class RegisterController extends Controller
             'nombre' => $data['nombre'],
             'apellido' => $data['apellido'],
             
+            
 
         ]);
 
@@ -96,15 +99,15 @@ class RegisterController extends Controller
                 'PASSWORD' => Hash::make($data['password']),
             ]);
             $user->assignRole('bibliotecario');
-        } 
-        else if ($form_type == 'miembro') {
+        } else if ($form_type == 'miembro') {
+
             $counter = 0;
             do {
                 $carnet_miembro = substr($data['apellido'], 0, 2) . substr($data['nombre'], 0, 2) . date('my') . ($counter > 0 ? $counter : '');
                 $carnet_miembro = strtoupper($carnet_miembro);
                 $counter++;
             } while (Miembro::where('CARNET_MIEMBRO', $carnet_miembro)->exists());
-            
+
             Miembro::create([
                 'CARNET_MIEMBRO' => $carnet_miembro,
                 'user_id' => $user->id,
@@ -121,8 +124,8 @@ class RegisterController extends Controller
                 'PENALIZADO' => false,
             ]);
             $user->assignRole('miembro');
-        } 
-        else if ($form_type == 'profesor') {
+
+        } else if ($form_type == 'profesor') {
             $counter = 0;
             do {
                 $carnet_profesor = substr($data['apellido'], 0, 2) . substr($data['nombre'], 0, 2) . date('my') . ($counter > 0 ? $counter : '');

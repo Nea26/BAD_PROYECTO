@@ -38,3 +38,24 @@
                    
                 });
 </script>
+<script>
+    $(document).ready(function() {
+        var cantidad = {{ $cantidad ?? '0' }};
+        if(cantidad > 0) {
+            $('#prestamosModal').modal('show');
+            setTimeout(function() {
+                $('#prestamosModal').modal('hide');
+                // Verifica si hay mensajes para mostrar después de cerrar prestamosModal
+                @if(!empty($mensajes))
+                    setTimeout(function() {
+                        $('#notificacionesModal').modal('show');
+                        // Cierra notificacionesModal después de 7 segundos
+                        setTimeout(function() {
+                            $('#notificacionesModal').modal('hide');
+                        }, 7000);
+                    }, 500); // Pequeño retraso para asegurar una transición suave
+                @endif
+            }, 7000);
+        }
+    });
+</script>

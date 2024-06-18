@@ -21,6 +21,10 @@ $(document).ready(function(){
     $('#success-alert').click(function() {
         $(this).fadeOut('slow');
     });
+    // Desaparecer la alerta al hacer clic en ella
+    $('.alert').click(function () {
+        $(this).fadeOut('slow');
+    });
 });
 //Salir del sistema
 function salirSistema(event) {

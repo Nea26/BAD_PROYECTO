@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Libro;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class CatalogoController extends Controller
 {
@@ -21,6 +24,82 @@ class CatalogoController extends Controller
      */
     public function index(): View
     {
+        //Para notificaciones de Prestamos
+        $user = auth()->user();
+        $user=User::find($user->id);
+        if ($user->hasRole('miembro')) {
+            
+            $miembro = DB::table('miembro')
+                ->where('user_id', $user->id)
+                ->first(); // Usa first() para obtener un solo registro
+        
+            if ($miembro) {
+                $carnet = $miembro->CARNET_MIEMBRO;
+                $prestamos = DB::table('prestamo_miembros')
+                    ->join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.codigo_internacional')
+                    ->where('carnet_miembro', $carnet)->where('devuelto', '0')
+                    ->get();
+        
+                $cantidad = $prestamos->isNotEmpty() ? count($prestamos) : 0;
+                $mensajes = [];
+        
+                $prestamos->each(function ($prestamo) use (&$mensajes) {
+                    date_default_timezone_set('America/El_Salvador');
+                    Carbon::setLocale('es');
+                    $fechaPrestamo = Carbon::parse($prestamo->fecha_prestamo);
+                    $fechaDevolucion = Carbon::parse($prestamo->fecha_devolucion);
+                    $fechaActual = Carbon::now();
+        
+                    $diasRestantes = $fechaDevolucion->diffInDays($fechaActual);
+        
+                    $tituloLibro = $prestamo->titulo;
+        
+                    if ($diasRestantes >= 0 && $diasRestantes <= 2) {
+                        $fechaDevolucionFormateada = $fechaDevolucion->translatedFormat('j \\d\\e F');
+                        $mensajes[] = "Tienes hasta el {$fechaDevolucionFormateada} para devolver el libro \"{$tituloLibro}\".";
+                    }
+                });
+        
+                return view('catalogo', ['libros' => Libro::where('cantidad_disponible', '>', 0)->paginate(4)], compact('cantidad', 'mensajes'));
+            }
+        }
+        else if($user->hasRole('profesor')){
+             
+            $profesor = DB::table('profesor')
+                ->where('user_id', $user->id)
+                ->first(); // Usa first() para obtener un solo registro
+        
+            if ($profesor) {
+                $carnet = $profesor->CARNET_PROFESOR;
+                $prestamos = DB::table('prestamo_miembros')
+                    ->join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.codigo_internacional')
+                    ->where('carnet_miembro', $carnet)->where('devuelto', '0')
+                    ->get();
+        
+                $cantidad = $prestamos->isNotEmpty() ? count($prestamos) : 0;
+                $mensajes = [];
+        
+                $prestamos->each(function ($prestamo) use (&$mensajes) {
+                    date_default_timezone_set('America/El_Salvador');
+                    Carbon::setLocale('es');
+                    $fechaPrestamo = Carbon::parse($prestamo->fecha_prestamo);
+                    $fechaDevolucion = Carbon::parse($prestamo->fecha_devolucion);
+                    $fechaActual = Carbon::now();
+        
+                    $diasRestantes = $fechaDevolucion->diffInDays($fechaActual);
+        
+                    $tituloLibro = $prestamo->titulo;
+        
+                    if ($diasRestantes >= 0 && $diasRestantes <= 2) {
+                        $fechaDevolucionFormateada = $fechaDevolucion->translatedFormat('j \\d\\e F');
+                        $mensajes[] = "Tienes hasta el {$fechaDevolucionFormateada} para devolver o ampliar el prestamo
+                        del libro \"{$tituloLibro}\".";
+                    }
+                });
+        
+                return view('catalogo', ['libros' => Libro::where('cantidad_disponible', '>', 0)->paginate(4)], compact('cantidad', 'mensajes'));
+            }
+        }
         $libros = Libro::where('cantidad_disponible', '>', 0)->paginate(4);
         return view('catalogo', ['libros' => $libros]);
     }

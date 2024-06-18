@@ -25,6 +25,15 @@
                 {{ session('success') }}
             </div>
         @endif
+        @if ($errors->any())
+    <div id="error-alert" class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div id="registrarMiembro">
             <br>
             <div class="container-fluid" id="cabeceraMiembro" style="margin: 50px 0;">
