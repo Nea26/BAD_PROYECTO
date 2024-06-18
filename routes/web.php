@@ -35,6 +35,8 @@ Route::get('/bibliotecario/home/buscar', [BibliotecarioController::class, 'busca
 Route::get('/profesor/home/buscar', [ProfesorController::class, 'buscar'])->name('profesor/home/buscar');
 Route::get('/miembro/home/buscar', [MiembroController::class, 'buscar'])->name('miembro/home/buscar');
 Route::get('catalago/buscar', [CatalogoController::class, 'buscar'])->name('catalogo/buscar');
+Route::get('estadisticas', [App\Http\Controllers\ReporteController::class, 'index'])->name('estadisticas');
+Route::get('reportes.pdf', [App\Http\Controllers\ReporteController::class, 'pdf'])->name('reportes.pdf');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home/profesores', [App\Http\Controllers\ProfesorController::class, 'verProfesores'])->name('home/profesores'); 
