@@ -56,6 +56,18 @@
                     </ul>
                     @endif
                 </li>
+                @if(auth()->user()->hasRole('miembro')||auth()->user()->hasRole('profesor'))
+                <li>                   
+                    <div class="dropdown-menu-button"><i class="zmdi zmdi-assignment-o zmdi-hc-fw"></i>&nbsp;&nbsp;
+                        Libros y catálogo <i class="zmdi zmdi-chevron-down pull-right zmdi-hc-fw icon-sub-menu"></i>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><a href="{{ route('catalogo.index') }}"><i class="zmdi zmdi-bookmark-outline zmdi-hc-fw"></i>&nbsp;&nbsp;
+                                Catálogo</a></li>
+                    </ul>
+                    
+                </li>
+                @endif
                 <li><a href="{{route('estadisticas')}}"><i class="zmdi zmdi-trending-up zmdi-hc-fw"></i>&nbsp;&nbsp; Reportes y
                         estadísticas</a></li>
                 <li><a href="advancesettings.html"><i class="zmdi zmdi-wrench zmdi-hc-fw"></i>&nbsp;&nbsp;

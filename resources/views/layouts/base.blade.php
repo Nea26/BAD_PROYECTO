@@ -23,7 +23,7 @@
         
         
         
-        
+       @include('includes.footer') 
     </div>  
     <script src="{{ asset('js/registro/registroUsuarios.js') }}"></script>
     <script src="{{ asset('js/bibliotecario/profesorCrud.js') }}"></script>
