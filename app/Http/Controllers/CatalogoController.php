@@ -56,7 +56,7 @@ class CatalogoController extends Controller
     //
     private function generarNotificaciones($carnet, $tipoUsuario): array
     {
-        $prestamos = PrestamoMiembro::join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.codigo_internacional')
+        $prestamos = PrestamoMiembro::join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.id')
             ->where('carnet_miembro', $carnet)->where('devuelto', '0')
             ->get();
 
