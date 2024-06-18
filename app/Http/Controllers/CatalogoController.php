@@ -121,9 +121,9 @@ class CatalogoController extends Controller
      */
     public function edit($id): View
     {
-        $categorias= Categoria::all();
-        $idiomas=Idioma::all();
-        $autores=Autor::all();
+        $categorias = Categoria::all();
+        $idiomas = Idioma::all();
+        $autores = Autor::all();
         $libro = Libro::with(['categoria', 'autor', 'idioma'])->find($id);
 
         return view('EditLibro', ['libro' => $libro, 'categorias' => $categorias, 'idiomas' => $idiomas, 'autores' => $autores]);
@@ -157,10 +157,18 @@ class CatalogoController extends Controller
         Paginator::useBootstrap();
         $libros = Libro::where('titulo', 'like', "%{$request->buscar_Libro}%")
             ->orWhere('codigo_internacional', 'like', "%{$request->buscar_Libro}%")
-            ->orWhere('idioma', 'like', "%{$request->buscar_Libro}%")
-            ->orWhere('edicion', 'like', "%{$request->buscar_Libro}%")
+            ->orWhereHas('idioma', function ($query) use ($request) {
+                $query->where('nombre_idioma', 'like', "%{$request->buscar_Libro}%");
+            })
+            ->orWhereHas('autor', function ($query) use ($request) {
+                $query->where('nombre', 'like', "%{$request->buscar_Libro}%");
+            })
+            ->orWhereHas('categoria', function ($query) use ($request) {
+                $query->where('nombre_categoria', 'like', "%{$request->buscar_Libro}%");
+            })
             ->orWhere('cantidad_disponible', 'like', "%{$request->buscar_Libro}%")
             ->paginate(4);
+
         if ($libros->isEmpty()) {
             return response()->json(['status' => 'error', 'message' => 'No se encontraron libros con este parametro de busqueda.']);
         } else {
