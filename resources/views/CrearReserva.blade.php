@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita la reserva" pattern="[0-9]{1,20}" required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el carnet del que solicita la reserva, solamente números">
+                                <input name="carnet" type="text" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita la reserva"  required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el carnet del que solicita la reserva, solamente números">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Carnet</label>

@@ -27,7 +27,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="codigo" type="text" value="{{old('codigo',$prestamo->id_ejemplar)}}" class="tooltips-general material-control" placeholder="Escribe aquí el código correlativo del libro" pattern="[0-9]{1,20}" required="" maxlength="20" data-toggle="tooltip" data-placement="top" title="Escribe el código correlativo del libro, solamente números">
+                                <input name="codigo" type="text" value="{{old('codigo',$prestamo->libro->codigo_internacional)}}" class="tooltips-general material-control" placeholder="Escribe aquí el código correlativo del libro" pattern="[0-9]{1,20}" required="" maxlength="20" data-toggle="tooltip" data-placement="top" title="Escribe el código correlativo del libro, solamente números">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Código correlativo</label>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="group-material">
-                                <input name="carnet" type="text" value="{{old('carnet',$prestamo->carnet_miembro)}}" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo" pattern="[0-9]{1,20}"  required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el carnet del que solicita el prestamo">
+                                <input name="carnet" type="text" value="{{old('carnet',$prestamo->carnet_miembro)}}" class="tooltips-general material-control" placeholder="Escribe aquí el carnet del que solicita el prestamo"  required="" maxlength="70" data-toggle="tooltip" data-placement="top" title="Escribe el carnet del que solicita el prestamo">
                                 <span class="highlight"></span>
                                 <span class="bar"></span>
                                 <label>Carnet</label>

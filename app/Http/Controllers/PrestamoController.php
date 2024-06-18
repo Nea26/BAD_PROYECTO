@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PrestamoMiembro;
+use App\Models\Libro;
+use App\Models\User;
+use App\Models\Miembro;
+use App\Models\Profesor;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -26,18 +30,49 @@ class PrestamoController extends Controller
     {
         $hoy = Carbon::now();
         $diaDevolucion=Carbon::now()->addDays(5);
-        return view('CrearPrestamo',['hoy' => $hoy,'diaDevolucion' => $diaDevolucion]);
+        return view('CrearPrestamo',['hoy' => $hoy,'diaDevolucion' => $diaDevolucion,'hola'=>'']);
     }
     public function store(Request $request){
         $prestamo = new PrestamoMiembro();
-        $prestamo->id_ejemplar = $request->codigo;
-        $prestamo->carnet_miembro = $request->carnet;
-        $prestamo->fecha_prestamo = $request->fechaPrestamo;
-        $prestamo->fecha_devolucion = $request->fechaDevolucion;
-        $prestamo->aprobado = 1;
-        $prestamo->save();
-
-        return to_route('prestamo.index');
+        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
+        $cantidad=$Libros->cantidad_disponible;
+        $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();
+        $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
+        if($Libros!=null && $Miembro!=null){
+            if($cantidad>0){
+            $prestamo->id_ejemplar = $Libros->id;
+            $prestamo->carnet_miembro = $request->carnet;
+            $prestamo->id_user =$Miembro->user_id;
+            $prestamo->fecha_prestamo = $request->fechaPrestamo;
+            $prestamo->fecha_devolucion = $request->fechaDevolucion;
+            $prestamo->aprobado = 1;
+            $cantidad=$cantidad-1;
+            DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
+            $prestamo->save();
+    
+            return to_route('prestamo.index');
+            }else{
+                return redirect()->route('prestamo.create',["error" => 'No hay libros disponibles']);
+            }
+        }elseif($Libros!=null && $Profesor!=null){
+            if($cantidad>0){
+            $prestamo->id_ejemplar = $Libros->id;
+            $prestamo->carnet_miembro = $request->carnet;
+            $prestamo->id_user =$Profesor->user_id;
+            $prestamo->fecha_prestamo = $request->fechaPrestamo;
+            $prestamo->fecha_devolucion = $request->fechaDevolucion;
+            $prestamo->aprobado = 1;
+            $cantidad=$cantidad-1;
+            DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
+            $prestamo->save();
+    
+            return to_route('prestamo.index');
+            }else{
+                return redirect()->route('prestamo.create',["error" => 'No hay libros disponibles']);
+            }
+        }else{
+            return redirect()->route('prestamo.create',["error" => 'No se encontro el miembro con el carnet ingresado']);
+        }
     }
     public function edit(PrestamoMiembro $prestamo)
     {
@@ -46,10 +81,14 @@ class PrestamoController extends Controller
     }
     public function update(Request $request, PrestamoMiembro $prestamo)
     {
-        //uso de carbon
-        $prestamo->id_ejemplar = $request->codigo;
+        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
+        $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();
+        $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
+    if($Libros!=null && $Miembro!=null){
+        $prestamo->id_ejemplar = $Libros->id;
         $prestamo->carnet_miembro = $request->carnet;
         $prestamo->fecha_prestamo = $request->fechaPrestamo;
+        $prestamo->id_user =$Miembro->user_id;
         $prestamo->fecha_devolucion = $request->fechaDevolucion;
         $prestamo->fecha_devuelto = $request->fechaDevuelto;
         if($request->devuelto){
@@ -62,6 +101,26 @@ class PrestamoController extends Controller
         $prestamo->save();
 
         return redirect()->route('prestamo.index');
+    }elseif($Libros!=null && $Profesor!=null){
+        $prestamo->id_ejemplar = $Libros->id;
+        $prestamo->carnet_miembro = $request->carnet;
+        $prestamo->fecha_prestamo = $request->fechaPrestamo;
+        $prestamo->id_user =$Profesor->user_id;
+        $prestamo->fecha_devolucion = $request->fechaDevolucion;
+        $prestamo->fecha_devuelto = $request->fechaDevuelto;
+        if($request->devuelto){
+            $prestamo->devuelto=1;
+        }else{
+            $prestamo->devuelto=0;
+            $prestamo->fecha_devuelto = null;
+
+        }
+        $prestamo->save();
+
+        return redirect()->route('prestamo.index');
+    }else{
+        return redirect()->route('prestamo.edit',["prestamo" => $prestamo]);
+    }
     }
     public function destroy(PrestamoMiembro $prestamo)
     {

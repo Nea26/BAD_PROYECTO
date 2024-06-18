@@ -8,9 +8,9 @@
     </div>
 </div>
 
-<h2 class="text-center all-tittles">Ejemplar: {{$prestamo->id_ejemplar}}</h2>
+<h2 class="text-center all-tittles">Ejemplar: {{$prestamo->libro->titulo}}</h2>
 <h2 class="text-center all-tittles">Carnet del miembro: {{$prestamo->carnet_miembro}}</h2>
-<h2 class="text-center all-tittles">Fecha de Solicitud: {{$prestamo->fecha_prestamo}}</h2>
+<h2 class="text-center all-tittles">Fecha de Solicitud: {{$prestamo->created_at->format('Y-m-d')}}</h2>
 
 <br>
 <br>
