@@ -22,5 +22,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call(RoleSeeder::class);
         $this->call(BibliotecarioSeeder::class);
+        $this->call(AutorSeeder::class);
+        $this->call(IdiomasSeeder::class);
+        $this->call(CategoriaSeeder::class);
     }
 }

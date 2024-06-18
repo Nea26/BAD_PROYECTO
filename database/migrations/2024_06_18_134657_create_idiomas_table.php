@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-
-        Schema::dropIfExists('libros');
-        
-        Schema::create('libros', function (Blueprint $table) {
+        Schema::create('idiomas', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('codigo_internacional');
-            $table->string('edicion');
-            $table->integer('cantidad_disponible');          
-            $table->timestamps();
+            $table->string('nombre_idioma');
         });
     }
 
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('libros');
+        Schema::dropIfExists('idiomas');
     }
 };

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Autor;
+use App\Models\Categoria;
+use App\Models\Categorium;
+use App\Models\Idioma;
 use App\Models\Libro;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -22,7 +26,10 @@ class LibroController extends Controller
      */
     public function index()
     {
-        return view('NuevoLibro');
+        $categorias= Categoria::all();
+        $idiomas=Idioma::all();
+        $autores=Autor::all();
+        return view('NuevoLibro',compact('categorias','idiomas','autores'));
     }
 
     /**
@@ -32,7 +39,10 @@ class LibroController extends Controller
      */
     public function create()
     {
-        return view('NuevoLibro');
+        $categorias= Categoria::all();
+        $idiomas=Idioma::all();
+        $autores=Autor::all();
+        return view('NuevoLibro',compact('categorias','idiomas','autores'));
     }
 
     /**
@@ -43,8 +53,16 @@ class LibroController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //dd($request->all()); 
-        libro::create($request->all());
+
+        Libro::create([
+            'titulo' => $request->titulo,
+            'codigo_internacional' => $request->codigo_internacional,
+            'id_autor' => $request->id_autor,
+            'id_idioma' => $request->id_idioma,
+            'id_categoria' => $request->id_categoria,
+            'edicion' => $request->edicion,
+            'cantidad_disponible' => $request->cantidad_disponible,
+        ]);
         return redirect()->route('book.index')->with('success','Nuevo Libro creado con exito!');
     }
 

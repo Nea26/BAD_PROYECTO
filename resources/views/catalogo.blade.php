@@ -41,7 +41,7 @@
                         <div class="div-table-cell" style="width: 22%;">Titulo</div>
                         <div class="div-table-cell" style="width: 22%;">Autor</div>
                         <div class="div-table-cell" style="width: 10%;">Idioma</div>
-                        <div class="div-table-cell" style="width: 10%;">Edicion</div>
+                        <div class="div-table-cell" style="width: 10%;">Categoria</div>
                         <div class="div-table-cell" style="width: 10%;">Disponibles</div>
                         @if(auth()->user()->hasRole('profesor')||auth()->user()->hasRole('miembro'))
                         <div class="div-table-cell" style="width: 8%;">Prestar</div>
@@ -60,9 +60,9 @@
 
                             <div class="div-table-cell" style="width: 6%;">{{ $libro->codigo_internacional }}</div>
                             <div class="div-table-cell" style="width: 22%;">{{ $libro->titulo }}</div>
-                            <div class="div-table-cell" style="width: 22%;"></div>
-                            <div class="div-table-cell" style="width: 10%;">{{ $libro->idioma }}</div>
-                            <div class="div-table-cell" style="width: 10%;">{{ $libro->edicion }}</div>
+                            <div class="div-table-cell" style="width: 22%;">{{$libro->autor->nombre}}</div>
+                            <div class="div-table-cell" style="width: 10%;">{{ $libro->idioma->nombre_idioma }}</div>
+                            <div class="div-table-cell" style="width: 10%;">{{ $libro->categoria->nombre_categoria }}</div>
                             <div class="div-table-cell" style="width: 10%;">{{ $libro->cantidad_disponible }}</div>
                         @if(auth()->user()->hasRole('profesor')||auth()->user()->hasRole('miembro'))
                             <div class="div-table-cell" style="width: 8%;">
