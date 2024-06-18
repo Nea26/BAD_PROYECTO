@@ -92,10 +92,19 @@ class ReservaController extends Controller
     }
     public function aprobacion(Request $request, PrestamoMiembro $prestamo)
     {
-        $prestamo->aprobado=1;
-        $prestamo->fecha_prestamo = $request->fechaPrestamo;
-        $prestamo->fecha_devolucion = $request->fechaDevolucion;
-        $prestamo->save();
-        return redirect()->route('reserva.index');
+        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first(); 
+        if($Libros->cantidad_disponible<=0){
+            return redirect()->route('reserva.aprobar',['prestamo'=>$prestamo,"error" => 'No hay ejemplares disponibles']);
+        }else{
+            $cantidad=$Libros->cantidad_disponible;
+            $cantidad=$cantidad-1;
+            $prestamo->aprobado=1;
+            $prestamo->fecha_prestamo = $request->fechaPrestamo;
+            $prestamo->fecha_devolucion = $request->fechaDevolucion;
+            DB::table('libros')->where('codigo_internacional',$request->codigo)->update(['cantidad_disponible' => $cantidad]);
+            $prestamo->save();
+            return redirect()->route('reserva.index');
+        }
+
     }
 }

@@ -106,13 +106,16 @@ class PrestamoPendienteController extends Controller
     }
     public function devolucion(Request $request, PrestamoMiembro $prestamo)
     {
+        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
+        $cantidad=$Libros->cantidad_disponible;
+        $cantidad=$cantidad+1;
         $prestamo->fecha_devuelto = $request->fechaDevuelto;
         $prestamo->devuelto = 1;
         if ($request->multa>0) {
             $prestamo->monto_multa = $request->multa;
             $prestamo->id_multa=random_int(1000, 9999);
         }
-        
+        DB::table('libros')->where('codigo_internacional',$request->codigo)->update(['cantidad_disponible' => $cantidad]);
         $prestamo->save();
 
         return redirect()->route('prestamoPendiente.index');

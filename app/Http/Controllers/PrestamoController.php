@@ -35,29 +35,41 @@ class PrestamoController extends Controller
     public function store(Request $request){
         $prestamo = new PrestamoMiembro();
         $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
+        $cantidad=$Libros->cantidad_disponible;
         $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();
         $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
         if($Libros!=null && $Miembro!=null){
+            if($cantidad>0){
             $prestamo->id_ejemplar = $Libros->id;
             $prestamo->carnet_miembro = $request->carnet;
             $prestamo->id_user =$Miembro->user_id;
             $prestamo->fecha_prestamo = $request->fechaPrestamo;
             $prestamo->fecha_devolucion = $request->fechaDevolucion;
             $prestamo->aprobado = 1;
+            $cantidad=$cantidad-1;
+            DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
             $prestamo->save();
     
             return to_route('prestamo.index');
-            
+            }else{
+                return redirect()->route('prestamo.create',["error" => 'No hay libros disponibles']);
+            }
         }elseif($Libros!=null && $Profesor!=null){
+            if($cantidad>0){
             $prestamo->id_ejemplar = $Libros->id;
             $prestamo->carnet_miembro = $request->carnet;
             $prestamo->id_user =$Profesor->user_id;
             $prestamo->fecha_prestamo = $request->fechaPrestamo;
             $prestamo->fecha_devolucion = $request->fechaDevolucion;
             $prestamo->aprobado = 1;
+            $cantidad=$cantidad-1;
+            DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
             $prestamo->save();
     
             return to_route('prestamo.index');
+            }else{
+                return redirect()->route('prestamo.create',["error" => 'No hay libros disponibles']);
+            }
         }else{
             return redirect()->route('prestamo.create',["error" => 'No se encontro el miembro con el carnet ingresado']);
         }
