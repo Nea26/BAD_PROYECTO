@@ -16,11 +16,10 @@ return new class extends Migration
         Schema::create('profesor', function (Blueprint $table) {
             $table->char('CARNET_PROFESOR', 50)->primary();
         $table->unsignedBigInteger('user_id'); 
-        $table->char('NOMBRE', 100);
-        $table->char('APELLIDO', 100);
+        
         $table->char('DUI', 25);
         $table->char('TELEFONO', 20);
-        $table->char('CORREO', 100);
+        
 
         $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
     

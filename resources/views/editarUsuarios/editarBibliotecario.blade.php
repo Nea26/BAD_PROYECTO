@@ -44,7 +44,7 @@
                                     <input name="nombre" type="text" class="material-control tooltips-general"
                                         placeholder="Nombres" required="" maxlength="70"
                                         pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip"
-                                        data-placement="top" title="Escribe tu nombre" value="{{$bibliotecario->NOMBRE}}">
+                                        data-placement="top" title="Escribe tu nombre" value="{{$user->apellido}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Nombres</label>
@@ -55,7 +55,7 @@
                                     <input name="apellido" type="text" class="material-control tooltips-general"
                                         placeholder="Apellidos" required="" maxlength="70"
                                         pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,70}" data-toggle="tooltip"
-                                        data-placement="top" title="Escribe tus apellidos" value="{{$bibliotecario->APELLIDO}}">
+                                        data-placement="top" title="Escribe tus apellidos" value="{{$user->apellido}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Apellidos</label>

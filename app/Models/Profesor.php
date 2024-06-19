@@ -37,8 +37,7 @@ class Profesor extends Model
 	protected $fillable = [
 		'CARNET_PROFESOR',
 		'user_id',
-		'NOMBRE',
-		'APELLIDO',
+		
 		'DUI',
 		'TELEFONO',
 		'CORREO'

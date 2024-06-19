@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id('ID_BIBLIOTECARIO');
             $table->unsignedBigInteger('user_id'); 
             $table->integer('ID_MULTA')->nullable();
-            $table->char('NOMBRE', 100);
-            $table->char('APELLIDO', 100);
+            
             $table->char('USER_NAME', 50);
             $table->char('PASSWORD', 100);
     

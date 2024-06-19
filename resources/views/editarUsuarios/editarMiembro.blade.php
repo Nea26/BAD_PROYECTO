@@ -52,7 +52,7 @@
                                         <input name="nombre" type="text" class="material-control tooltips-general"
                                             placeholder="Escribe tu nombre" required=""
                                             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" maxlength="70" data-toggle="tooltip"
-                                            data-placement="top" title="Escribe tu nombre" value="{{$miembro->NOMBRE}}">
+                                            data-placement="top" title="Escribe tu nombre" value="{{$user->nombre}}">
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Nombres</label>
@@ -63,7 +63,7 @@
                                         <input name="apellido" type="text" class="material-control tooltips-general"
                                             placeholder="Escribe tus apellidos" required=""
                                             pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,70}" maxlength="70" data-toggle="tooltip"
-                                            data-placement="top" title="Escribe tus Apellidos" value="{{$miembro->APELLIDO}}">
+                                            data-placement="top" title="Escribe tus Apellidos" value="{{$user->apellido}}">
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Apellidos</label>
@@ -119,7 +119,7 @@
                                     <div class="group-material">
                                         <input name="email" type="email" class="material-control tooltips-general"
                                             placeholder="E-mail" required="" maxlength="50" data-toggle="tooltip"
-                                            data-placement="top" title="Escribe el Email del miembro" value="{{$miembro->CORREO}}">
+                                            data-placement="top" title="Escribe el Email del miembro" value="{{$user->email}}">
                                         <span class="highlight"></span>
                                         <span class="bar"></span>
                                         <label>Email</label>

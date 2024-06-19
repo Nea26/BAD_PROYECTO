@@ -89,7 +89,7 @@ class MiembroController extends Controller
         // listado de Miembros
         $miembros = DB::table('miembro')
             ->join('users', 'miembro.user_id', '=', 'users.id')
-            ->select('miembro.*', 'users.activo')->paginate(5);
+            ->select('miembro.*','users.nombre','users.email','users.apellido', 'users.activo')->paginate(5);
         return view('administrarMiembros', [
             'miembros' => $miembros,
         ]);
@@ -98,10 +98,10 @@ class MiembroController extends Controller
         Paginator::useBootstrap();
         $miembros = DB::table('miembro')
         ->join('users', 'miembro.user_id', '=', 'users.id')
-        ->where('miembro.NOMBRE', 'like', '%' . $request->buscar_Miembro . '%')
-        ->orWhere('miembro.APELLIDO', 'like', '%' . $request->buscar_Miembro . '%')
+        ->where('users.nombre', 'like', '%' . $request->buscar_Miembro . '%')
+        ->orWhere('users.apellido', 'like', '%' . $request->buscar_Miembro . '%')
         ->orWhere('miembro.CARNET_Miembro', 'like', '%' . $request->buscar_Miembro . '%')
-        ->orderBy('miembro.NOMBRE', 'asc')
+        ->orderBy('users.nombre', 'asc')
         ->paginate(5);
         if ($miembros->isEmpty()) {
             return response()->json(['status' => 'error', 'message' => 'No se encontraron resultados']);
@@ -114,7 +114,7 @@ class MiembroController extends Controller
             Paginator::useBootstrap();
             $miembros = DB::table('miembro')
                 ->join('users', 'miembro.user_id', '=', 'users.id')
-                ->select('miembro.*', 'users.activo')->paginate(5);
+                ->select('miembro.*','users.nombre','users.apellido', 'users.activo')->paginate(5);
                 return view('paginacion/paginacionMiembros', compact('miembros'));
         }
 }

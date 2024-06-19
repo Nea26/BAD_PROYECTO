@@ -9,20 +9,26 @@ use App\Models\Miembro;
 use App\Models\Profesor;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
 
 class UsuariosRegistroController extends Controller
 {
     public function register(Request $request)
     {
         $form_type = $request->input('tipo');
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8',
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'fecha_nac' => 'required|date|before:-12 years',
+            // Nota: No incluimos 'fecha_nac' aquí porque su validación será condicional
         ]);
+    
+        // Añadir validación condicional para 'fecha_nac'
+        $validator->sometimes('fecha_nac', 'required|date|before:-12 years', function ($input) {
+            return $input['tipo'] === 'miembro';
+        });
         
         $user = User::create([
             'name' => $request->input('name'),
@@ -38,8 +44,7 @@ class UsuariosRegistroController extends Controller
             Bibliotecario::create([
                 'user_id' => $user->id,
                 'ID_MULTA' => null,
-                'NOMBRE' => $request->input('nombre'),
-                'APELLIDO' => $request->input('apellido'),
+                
                 'USER_NAME' => $request->input('name'),
                 'PASSWORD' => Hash::make($request->input('password')),
             ]);
@@ -62,13 +67,12 @@ class UsuariosRegistroController extends Controller
             Miembro::create([
                 'CARNET_MIEMBRO' => $carnet_miembro,
                 'user_id' => $user->id,
-                'NOMBRE' => $request->input('nombre'),
-                'APELLIDO' => $request->input('apellido'),
+                
                 'FECHA_NACIMIENTO' => $request->input('fecha_nac'),
                 'DOC_IDENTIFICACION' => $request->input('tipo_identificacion'),
                 'NUM_DOC_IDENTIFICACION' => $request->input('num_identificacion'),
                 'TELEFONO' => $request->input('telefono'),
-                'CORREO' => $request->input('email'),
+                
                 'FECHA_MEMBRESIA' => date('Y-m-d'),
                 'VIGENCIA' => date('Y-m-d', strtotime('+1 year')),
                 'COSTO_CARNET' => 5.0,
@@ -86,11 +90,10 @@ class UsuariosRegistroController extends Controller
             Profesor::create([
                 'CARNET_PROFESOR' => $carnet_profesor,
                 'user_id' => $user->id,
-                'NOMBRE' => $request->input('nombre'),
-                'APELLIDO' => $request->input('apellido'),
+                
                 'DUI' => $request->input('dui'),
                 'TELEFONO' => $request->input('telefono'),
-                'CORREO' => $request->input('email'),
+                
             ]);
             $user->assignRole('profesor');
         }

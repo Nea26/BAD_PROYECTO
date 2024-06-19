@@ -205,13 +205,14 @@
                                 @foreach ($profesores as $profesor)
                                     <tr>
                                         <td>{{ $profesor->CARNET_PROFESOR }}</td>
-                                        <td>{{ $profesor->NOMBRE }}</td>
-                                        <td>{{ $profesor->APELLIDO }}</td>
+                                        <td>{{ $profesor->nombre }}</td>
+                                        <td>{{ $profesor->apellido }}</td>
                                         <td>{{ $profesor->DUI }}</td>
-                                        <td>{{ $profesor->CORREO }}</td>
+                                        <td>{{ $profesor->email }}</td>
                                         <td>{{ $profesor->TELEFONO }}</td>
                                         <td>{{ $profesor->activo ? 'Activo' : 'Inactivo' }}</td>
                                         <td>
+                                            <div style="display: flex; justify-content: space-between;">
                                             <form method="POST"
                                                     action="{{ route('profesor/home/estado/', $profesor->user_id) }}">
                                                     @csrf
@@ -220,7 +221,7 @@
                                                         title="Cambia el estado"><i
                                                             class="zmdi zmdi-swap"></i></button>
                                                 </form>
-                                            <div style="display: flex; justify-content: space-between;">
+                                            
                                                 <a href="{{ url('profesor/home/edit/' . $profesor->user_id) }}"
                                                     class="btn btn-info"><i class="zmdi zmdi-edit"></i></a>
                                                 <form action="{{ url('profesor/home/' . $profesor->user_id) }}"

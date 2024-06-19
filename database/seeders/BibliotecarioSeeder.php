@@ -24,8 +24,7 @@ class BibliotecarioSeeder extends Seeder
         Bibliotecario::create([
             'user_id' => $user->id,
             'ID_MULTA' => null,
-            'NOMBRE' => $user->nombre,
-            'APELLIDO' => $user->apellido,
+            
             'USER_NAME' => $user->name,
             'PASSWORD' => Hash::make($user->password),
         ]);

@@ -56,7 +56,7 @@
                                         placeholder="Escribe aquí los nombres del docente"
                                         pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" required="" maxlength="50"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Escribe los nombres del docente, solamente letras" value="{{$profesor->NOMBRE}}">
+                                        title="Escribe los nombres del docente, solamente letras" value="{{$user->nombre}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Nombres</label>
@@ -68,7 +68,7 @@
                                         placeholder="Escribe aquí los apellidos del docente"
                                         pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{1,50}" required="" maxlength="50"
                                         data-toggle="tooltip" data-placement="top"
-                                        title="Escribe los apellidos del docente, solamente letras" value="{{$profesor->APELLIDO}}">
+                                        title="Escribe los apellidos del docente, solamente letras" value="{{$user->apellido}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Apellidos</label>
@@ -87,7 +87,7 @@
                                 <div class="group-material">
                                     <input name="email" type="email" class="material-control tooltips-general"
                                         placeholder="E-mail" required="" maxlength="50" data-toggle="tooltip"
-                                        data-placement="top" title="Escribe el Email del docente" value="{{$profesor->CORREO}}">
+                                        data-placement="top" title="Escribe el Email del docente" value="{{$user->email}}">
                                     <span class="highlight"></span>
                                     <span class="bar"></span>
                                     <label>Email</label>

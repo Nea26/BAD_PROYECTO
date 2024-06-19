@@ -16,13 +16,11 @@ return new class extends Migration
         Schema::create('miembro', function (Blueprint $table) {
         $table->char('CARNET_MIEMBRO', 50)->primary();
         $table->unsignedBigInteger('user_id'); 
-        $table->char('NOMBRE', 100);
-        $table->char('APELLIDO', 100);
         $table->date('FECHA_NACIMIENTO');
         $table->char('DOC_IDENTIFICACION', 50);
         $table->char('NUM_DOC_IDENTIFICACION', 100);
         $table->char('TELEFONO', 20);
-        $table->char('CORREO', 100);
+        
         $table->date('FECHA_MEMBRESIA');
         $table->date('VIGENCIA');
         $table->integer('COSTO_CARNET');

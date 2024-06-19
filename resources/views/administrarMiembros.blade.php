@@ -249,10 +249,10 @@
                                 @foreach ($miembros as $miembro)
                                     <tr>
                                         <td>{{ $miembro->CARNET_MIEMBRO }}</td>
-                                        <td>{{ $miembro->NOMBRE }}</td>
-                                        <td>{{ $miembro->APELLIDO }}</td>
+                                        <td>{{ $miembro->nombre }}</td>
+                                        <td>{{ $miembro->apellido }}</td>
                                         <td>{{ $miembro->TELEFONO }}</td>
-                                        <td>{{ $miembro->CORREO }}</td>
+                                        <td>{{ $miembro->email }}</td>
                                         <td>{{ $miembro->FECHA_MEMBRESIA }}</td>
                                         <td>{{ $miembro->VIGENCIA }}</td>
                                         <td>{{ $miembro->activo ? 'Activo' : 'Inactivo' }}</td>

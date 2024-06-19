@@ -37,8 +37,7 @@ class Bibliotecario extends Model
 	protected $fillable = [
 		'user_id',
 		'ID_MULTA',
-		'NOMBRE',
-		'APELLIDO',
+		
 		'USER_NAME',
 		'PASSWORD'
 	];

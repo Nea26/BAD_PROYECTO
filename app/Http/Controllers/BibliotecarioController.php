@@ -64,8 +64,7 @@ class BibliotecarioController extends Controller
 
         // Actualiza los campos del bibliotecario
         $bibliotecarioData = [
-            'NOMBRE' => $userData['nombre'],
-            'APELLIDO' => $userData['apellido'],
+            
             'USER_NAME' => $userData['name'],
             'PASSWORD' => $userData['password']
         ];
@@ -80,8 +79,8 @@ class BibliotecarioController extends Controller
         Paginator::useBootstrap();
         $bibliotecarios = DB::table('bibliotecario')
     ->join('users', 'bibliotecario.user_id', '=', 'users.id')
-    ->where('bibliotecario.NOMBRE', 'like', '%' . $request->buscar_Bibliotecario . '%')
-    ->orWhere('bibliotecario.APELLIDO', 'like', '%' . $request->buscar_Bibliotecario . '%')
+    ->where('users.nombre', 'like', '%' . $request->buscar_Bibliotecario . '%')
+    ->orWhere('users.apellido', 'like', '%' . $request->buscar_Bibliotecario . '%')
     ->orderBy('bibliotecario.ID_BIBLIOTECARIO')
     ->paginate(5);
     if ($bibliotecarios->isEmpty()) {
@@ -95,7 +94,7 @@ class BibliotecarioController extends Controller
         Paginator::useBootstrap();
         $bibliotecarios = DB::table('bibliotecario')
             ->join('users', 'bibliotecario.user_id', '=', 'users.id')
-            ->select('bibliotecario.*', 'users.activo')->paginate(5);
+            ->select('bibliotecario.*','users.nombre','users.apellido','users.email', 'users.activo')->paginate(5);
         return view('paginacion/paginacionBiblio', compact('bibliotecarios'));
     }
 

@@ -32,7 +32,7 @@ class HomeController extends Controller
         // listado de bibliotecarios
         $bibliotecarios = DB::table('bibliotecario')
             ->join('users', 'bibliotecario.user_id', '=', 'users.id')
-            ->select('bibliotecario.*', 'users.activo')->paginate(5);
+            ->select('bibliotecario.*','users.nombre','users.apellido', 'users.activo')->paginate(5);
         return view('homeBibliotecario', [
             'bibliotecarios' => $bibliotecarios,
 
