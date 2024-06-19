@@ -48,7 +48,6 @@ class PrestamoController extends Controller
                 $prestamo->fecha_devolucion = $request->fechaDevolucion;
                 $prestamo->aprobado = 1;
                 $cantidad = $cantidad - 1;
-                DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
                 $prestamo->save();
                 return to_route('prestamo.index');
             } elseif ($Profesor != null && $cantidad > 0) {
@@ -59,7 +58,6 @@ class PrestamoController extends Controller
                 $prestamo->fecha_devolucion = $request->fechaDevolucion;
                 $prestamo->aprobado = 1;
                 $cantidad = $cantidad - 1;
-                DB::table('libros')->where('id', $Libros->id)->update(['cantidad_disponible' => $cantidad]);
                 $prestamo->save();
                 return to_route('prestamo.index');
             } else {
