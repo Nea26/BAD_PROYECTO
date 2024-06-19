@@ -127,5 +127,5 @@
         </div>
         @include('reportes.graficas')
     </div>
-    @include('includes.footer')
+    
 @endsection

@@ -24,17 +24,19 @@ class ReporteController extends Controller
 
         // Mayor cantidad de préstamos por miembro
         $mayorPrestamosMiembro = DB::table('prestamo_miembros')
-            ->select('miembro.carnet_miembro', 'miembro.nombre', 'miembro.apellido', DB::raw('count(*) as total_prestamos'))
+            ->select('users.name', DB::raw('count(*) as total_prestamos'))
             ->join('miembro', 'prestamo_miembros.carnet_miembro', '=', 'miembro.carnet_miembro')
-            ->groupBy('miembro.carnet_miembro', 'miembro.nombre', 'miembro.apellido')
+            ->join('users', 'miembro.user_id', '=', 'users.id')
+            ->groupBy('users.name')
             ->orderBy('total_prestamos', 'desc')
             ->first();
             
         //Mayor cantidad de préstamos por profesor
         $mayorPrestamosProfesor = DB::table('prestamo_miembros')
-            ->select('profesor.carnet_profesor', 'profesor.nombre', 'profesor.apellido', DB::raw('count(*) as total_prestamos'))
+            ->select('profesor.carnet_profesor', 'users.nombre', 'users.apellido', DB::raw('count(*) as total_prestamos'))
             ->join('profesor', 'prestamo_miembros.carnet_miembro', '=', 'profesor.carnet_profesor')
-            ->groupBy('profesor.carnet_profesor', 'profesor.nombre', 'profesor.apellido')
+            ->join('users', 'profesor.user_id', '=', 'users.id')
+            ->groupBy('profesor.carnet_profesor', 'users.nombre', 'users.apellido')
             ->orderBy('total_prestamos', 'desc')
             ->first();
             //Libro mas prestado
@@ -75,7 +77,8 @@ class ReporteController extends Controller
         $mayorPrestamosMiembro = DB::table('prestamo_miembros')
             ->select('miembro.carnet_miembro', 'miembro.nombre', 'miembro.apellido', DB::raw('count(*) as total_prestamos'))
             ->join('miembro', 'prestamo_miembros.carnet_miembro', '=', 'miembro.carnet_miembro')
-            ->groupBy('miembro.carnet_miembro', 'miembro.nombre', 'miembro.apellido')
+            ->join('users', 'miembro.user_id', '=', 'users.id')
+            ->groupBy('miembro.carnet_miembro', 'users.nombre', 'users.apellido')
             ->orderBy('total_prestamos', 'desc')
             ->first();
             
@@ -83,7 +86,8 @@ class ReporteController extends Controller
         $mayorPrestamosProfesor = DB::table('prestamo_miembros')
             ->select('profesor.carnet_profesor', 'profesor.nombre', 'profesor.apellido', DB::raw('count(*) as total_prestamos'))
             ->join('profesor', 'prestamo_miembros.carnet_miembro', '=', 'profesor.carnet_profesor')
-            ->groupBy('profesor.carnet_profesor', 'profesor.nombre', 'profesor.apellido')
+            ->join('users', 'profesor.user_id', '=', 'users.id')
+            ->groupBy('profesor.carnet_profesor', 'users.nombre', 'users.apellido')
             ->orderBy('total_prestamos', 'desc')
             ->first();
             //Libro mas prestado
