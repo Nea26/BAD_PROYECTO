@@ -75,7 +75,7 @@ class ReporteController extends Controller
 
         // Mayor cantidad de préstamos por miembro
         $mayorPrestamosMiembro = DB::table('prestamo_miembros')
-            ->select('miembro.carnet_miembro', 'miembro.nombre', 'miembro.apellido', DB::raw('count(*) as total_prestamos'))
+            ->select('miembro.carnet_miembro', 'users.nombre', 'users.apellido', DB::raw('count(*) as total_prestamos'))
             ->join('miembro', 'prestamo_miembros.carnet_miembro', '=', 'miembro.carnet_miembro')
             ->join('users', 'miembro.user_id', '=', 'users.id')
             ->groupBy('miembro.carnet_miembro', 'users.nombre', 'users.apellido')
@@ -84,7 +84,7 @@ class ReporteController extends Controller
             
         //Mayor cantidad de préstamos por profesor
         $mayorPrestamosProfesor = DB::table('prestamo_miembros')
-            ->select('profesor.carnet_profesor', 'profesor.nombre', 'profesor.apellido', DB::raw('count(*) as total_prestamos'))
+            ->select('profesor.carnet_profesor', 'users.nombre', 'users.apellido', DB::raw('count(*) as total_prestamos'))
             ->join('profesor', 'prestamo_miembros.carnet_miembro', '=', 'profesor.carnet_profesor')
             ->join('users', 'profesor.user_id', '=', 'users.id')
             ->groupBy('profesor.carnet_profesor', 'users.nombre', 'users.apellido')
@@ -107,6 +107,6 @@ class ReporteController extends Controller
                 'usuario' => $usuario
             ];
         $pdf = PDF::loadView('reportes.pdf', $data);
-        return $pdf->download('reporte.pdf');
+        return $pdf->stream('reporte.pdf');
     }
 }

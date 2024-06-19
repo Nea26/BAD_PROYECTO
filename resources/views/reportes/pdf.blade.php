@@ -166,20 +166,30 @@
                     <tbody>
                         <tr>
                             <td class="text-center"><img src="assets/img/user03.png" alt="Descripción" width="30" height="25"> Miembro con mayor préstamos realizados</td>
-                            <td class="text-center">{{ $mayorPrestamoMiembro->total_prestamos }}</td>
-                            <td class="text-center">{{ explode(' ', $mayorPrestamoMiembro->nombre)[0] }}
-                                {{ explode(' ', $mayorPrestamoMiembro->apellido)[0] }}</td>
+                            <td class="text-center">{{ $mayorPrestamoMiembro ? $mayorPrestamoMiembro->total_prestamos : 'N/A' }}</td>
+                            <td class="text-center">
+                                @if($mayorPrestamoMiembro)
+                                    {{ explode(' ', $mayorPrestamoMiembro->nombre)[0] }} {{ explode(' ', $mayorPrestamoMiembro->apellido)[0] }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center"><img src="assets/img/user02.png" alt="Descripción" width="30" height="25"> Profesor con mayor préstamos realizados</td>
-                            <td class="text-center">{{ $mayorPrestamoProfesor->total_prestamos }}</td>
-                            <td class="text-center">{{ explode(' ', $mayorPrestamoProfesor->nombre)[0] }}
-                                {{ explode(' ', $mayorPrestamoProfesor->apellido)[0] }}</td>
+                            <td class="text-center">{{ $mayorPrestamoProfesor ? $mayorPrestamoProfesor->total_prestamos : 'N/A' }}</td>
+                            <td class="text-center">
+                                @if($mayorPrestamoProfesor)
+                                    {{ explode(' ', $mayorPrestamoProfesor->nombre)[0] }} {{ explode(' ', $mayorPrestamoProfesor->apellido)[0] }}
+                                @else
+                                    N/A
+                                @endif
+                            </td>
                         </tr>
                         <tr>
                             <td class="text-center"><img src="assets/img/book.png" alt="Descripción" width="30" height="25"> Libro más prestado</td>
-                            <td class="text-center">{{ $libroMasPrestado->total_prestamos }}</td>
-                            <td class="text-center">{{ $libroMasPrestado->titulo }}</td>
+                            <td class="text-center">{{ $libroMasPrestado ? $libroMasPrestado->total_prestamos : 'N/A' }}</td>
+                            <td class="text-center">{{ $libroMasPrestado ? $libroMasPrestado->titulo : 'N/A' }}</td>
                         </tr>
                     </tbody>
                 </table>
