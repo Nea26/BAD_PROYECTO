@@ -49,13 +49,12 @@ class Miembro extends Model
 	protected $fillable = [
 		'CARNET_MIEMBRO',
 		'user_id',
-		'NOMBRE',
-		'APELLIDO',
+		
 		'FECHA_NACIMIENTO',
 		'DOC_IDENTIFICACION',
 		'NUM_DOC_IDENTIFICACION',
 		'TELEFONO',
-		'CORREO',
+		
 		'FECHA_MEMBRESIA',
 		'VIGENCIA',
 		'COSTO_CARNET',

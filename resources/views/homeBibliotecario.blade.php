@@ -176,8 +176,8 @@
                                 @foreach ($bibliotecarios as $bibliotecario)
                                     <tr>
                                         <td>{{ $bibliotecario->ID_BIBLIOTECARIO }}</td>
-                                        <td>{{ $bibliotecario->NOMBRE }}</td>
-                                        <td>{{ $bibliotecario->APELLIDO }}</td>
+                                        <td>{{ $bibliotecario->nombre }}</td>
+                                        <td>{{ $bibliotecario->apellido }}</td>
                                         <td>{{ $bibliotecario->USER_NAME }}</td>
                                         <td>{{ $bibliotecario->activo ? 'Activo' : 'Inactivo' }}</td>
                                         <td>

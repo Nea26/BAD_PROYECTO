@@ -44,12 +44,12 @@ class ProfesorController extends Controller
         
         Paginator::useBootstrap();
         // listado de Profesores
-        $profesores = DB::table('profesor')
-            ->join('users', 'profesor.user_id', '=', 'users.id')
-            ->select('profesor.*', 'users.activo')->paginate(5);
-        return view('administrarProfesores', [
-            'profesores' => $profesores,
-        ]);
+    $profesores = DB::table('profesor')
+    ->join('users', 'profesor.user_id', '=', 'users.id')
+    ->select('profesor.*', 'users.nombre', 'users.apellido','users.email', 'users.activo')->paginate(5);
+return view('administrarProfesores', [
+    'profesores' => $profesores,
+]);
     }
     //Cambiar estado
     public function cambiarEstado($id)
@@ -82,11 +82,10 @@ class ProfesorController extends Controller
 
         // Actualiza los campos del bibliotecario
         $profesorData = [
-            'NOMBRE' => $userData['nombre'],
-            'APELLIDO' => $userData['apellido'],
+            
             'DUI' => $request->dui,
             'TELEFONO' => $request->telefono,
-            'CORREO' => $userData['email'],
+        
         ];
 
         $profesor->update($profesorData);
@@ -98,10 +97,10 @@ class ProfesorController extends Controller
         Paginator::useBootstrap();
         $profesores = DB::table('profesor')
     ->join('users', 'profesor.user_id', '=', 'users.id')
-    ->where('profesor.NOMBRE', 'like', '%' . $request->buscar_Profesor . '%')
-    ->orWhere('profesor.APELLIDO', 'like', '%' . $request->buscar_Profesor . '%')
+    ->where('users.NOMBRE', 'like', '%' . $request->buscar_Profesor . '%')
+    ->orWhere('users.APELLIDO', 'like', '%' . $request->buscar_Profesor . '%')
     ->orWhere('profesor.CARNET_PROFESOR', 'like', '%' . $request->buscar_Profesor . '%')
-    ->orderBy('profesor.NOMBRE', 'asc')
+    ->orderBy('users.NOMBRE', 'asc')
     ->paginate(5);
     if ($profesores->isEmpty()) {
         return response()->json(['status' => 'error', 'message' => 'No se encontraron resultados']);
@@ -114,7 +113,7 @@ class ProfesorController extends Controller
         Paginator::useBootstrap();
         $profesores = DB::table('profesor')
             ->join('users', 'profesor.user_id', '=', 'users.id')
-            ->select('profesor.*', 'users.activo')->paginate(5);
+            ->select('profesor.*','users.apellido','users.apellido', 'users.activo')->paginate(5);
             return view('paginacion/paginacionProf', compact('profesores'));
     }
 }

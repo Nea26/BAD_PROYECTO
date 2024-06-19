@@ -56,15 +56,21 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'nombre' => ['required', 'string', 'max:255'],
             'apellido' => ['required', 'string', 'max:255'],
-            'fecha_nac' => ['required', 'date', 'before:-12 years'],
-
+            // La validación de fecha_nac se mueve a una condición específica
         ]);
+    
+        // Aplicar validación de fecha_nac solo si el tipo es 'miembro'
+        $validator->sometimes('fecha_nac', 'required|date|before:-12 years', function ($input) {
+            return $input->tipo === 'miembro';
+        });
+    
+        return $validator;
     }
 
     /**
@@ -73,18 +79,15 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
+    
     protected function create(array $data)
     {
-
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'nombre' => $data['nombre'],
             'apellido' => $data['apellido'],
-            
-            
-
         ]);
 
         $form_type = $data['tipo'];
@@ -93,14 +96,11 @@ class RegisterController extends Controller
             Bibliotecario::create([
                 'user_id' => $user->id,
                 'ID_MULTA' => null,
-                'NOMBRE' => $data['nombre'],
-                'APELLIDO' => $data['apellido'],
                 'USER_NAME' => $data['name'],
                 'PASSWORD' => Hash::make($data['password']),
             ]);
             $user->assignRole('bibliotecario');
         } else if ($form_type == 'miembro') {
-
             $counter = 0;
             do {
                 $carnet_miembro = substr($data['apellido'], 0, 2) . substr($data['nombre'], 0, 2) . date('my') . ($counter > 0 ? $counter : '');
@@ -111,13 +111,11 @@ class RegisterController extends Controller
             Miembro::create([
                 'CARNET_MIEMBRO' => $carnet_miembro,
                 'user_id' => $user->id,
-                'NOMBRE' => $data['nombre'],
-                'APELLIDO' => $data['apellido'],
                 'FECHA_NACIMIENTO' => $data['fecha_nac'],
                 'DOC_IDENTIFICACION' => $data['tipo_identificacion'],
                 'NUM_DOC_IDENTIFICACION' => $data['num_identificacion'],
                 'TELEFONO' => $data['telefono'],
-                'CORREO' => $data['email'],
+                
                 'FECHA_MEMBRESIA' => date('Y-m-d'),
                 'VIGENCIA' => date('Y-m-d', strtotime('+1 year')),
                 'COSTO_CARNET' => 5.0,
@@ -136,11 +134,9 @@ class RegisterController extends Controller
             Profesor::create([
                 'CARNET_PROFESOR' => $carnet_profesor,
                 'user_id' => $user->id,
-                'NOMBRE' => $data['nombre'],
-                'APELLIDO' => $data['apellido'],
                 'DUI' => $data['dui'],
                 'TELEFONO' => $data['telefono'],
-                'CORREO' => $data['email'],
+                
             ]);
             $user->assignRole('profesor');
         }
