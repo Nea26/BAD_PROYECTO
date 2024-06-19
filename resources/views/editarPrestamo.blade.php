@@ -17,6 +17,11 @@
             </div>
         </div>
         <div class="container-fluid">
+            @if('session'('error'))
+            <div class="alert alert-danger text-center">
+                {{session('error')}}
+            </div>
+            @endif
             <div class="container-flat-form">
                 <div class="title-flat-form title-flat-blue">Nuevo Prestamo</div>
                 <form method="POST" action="{{route('prestamo.update', $prestamo)}}" class="form-padding">

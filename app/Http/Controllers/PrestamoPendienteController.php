@@ -33,53 +33,41 @@ class PrestamoPendienteController extends Controller
         return view('editarPrestamoPendiente',['prestamo' => $prestamo]);
         
     }
+    
     public function update(Request $request, PrestamoMiembro $prestamo)
     {
-        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
-        $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();
-        $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
-        
-        if($Libros!=null && $Miembro!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->id_user =$Miembro->user_id;
-            $prestamo->fecha_prestamo = $request->fechaPrestamo;
-            $prestamo->fecha_devolucion = $request->fechaDevolucion;
-            if($request->devuelto){
-                $prestamo->aprobado = 1;}
-            else{
-                $prestamo->aprobado = 0;
-                $prestamo->fecha_prestamo = null;
-                $prestamo->fecha_devolucion = null;
-            }
-            if($request->extenso){
-                $prestamo->fecha_devolucion=Carbon::parse($request->fechaDevolucion)->addDays(5);
-            }
-            $prestamo->save();
-    
-            return redirect()->route('prestamoPendiente.index');
-        }elseif($Libros!=null && $Profesor!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->id_user =$Profesor->user_id;
-            $prestamo->fecha_prestamo = $request->fechaPrestamo;
-            $prestamo->fecha_devolucion = $request->fechaDevolucion;
-            if($request->devuelto){
-                $prestamo->aprobado = 1;}
-            else{
-                $prestamo->aprobado = 0;
-                $prestamo->fecha_prestamo = null;
-                $prestamo->fecha_devolucion = null;
-            }
-            if($request->extenso){
-                $prestamo->fecha_devolucion=Carbon::parse($request->fechaDevolucion)->addDays(5);
-            }
-            $prestamo->save();
-    
-            return redirect()->route('prestamoPendiente.index');
-        }else{
-            return redirect()->route('prestamoPendiente.edit',["prestamo" => $prestamo]);
+        $Libros = DB::table("libros")->where("codigo_internacional", $request->codigo)->first();
+        if (!$Libros) {
+            return redirect()->route('prestamoPendiente.edit', ["prestamo" => $prestamo])->with('error', 'No se encontró el libro con el código ingresado.');
         }
+    
+        $Miembro = DB::table("miembro")->where("CARNET_MIEMBRO", $request->carnet)->first();
+        $Profesor = DB::table("profesor")->where("CARNET_PROFESOR", $request->carnet)->first();
+        if (!$Miembro && !$Profesor) {
+            return redirect()->route('prestamoPendiente.edit', ["prestamo" => $prestamo])->with('error', 'No se encontró el miembro o profesor con el carnet ingresado.');
+        }
+    
+        $prestamo->id_ejemplar = $Libros->id;
+        $prestamo->carnet_miembro = $request->carnet;
+        $prestamo->id_user = $Miembro ? $Miembro->user_id : $Profesor->user_id;
+        $prestamo->fecha_prestamo = $request->fechaPrestamo;
+        $prestamo->fecha_devolucion = $request->fechaDevolucion;
+    
+        if ($request->devuelto) {
+            $prestamo->aprobado = 1;
+        } else {
+            $prestamo->aprobado = 0;
+            $prestamo->fecha_prestamo = null;
+            $prestamo->fecha_devolucion = null;
+        }
+    
+        if ($request->extenso) {
+            $prestamo->fecha_devolucion = Carbon::parse($request->fechaDevolucion)->addDays(5);
+        }
+    
+        $prestamo->save();
+    
+        return redirect()->route('prestamoPendiente.index');
     }
     public function destroy(PrestamoMiembro $prestamo)
     {

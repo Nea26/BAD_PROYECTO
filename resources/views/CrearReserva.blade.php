@@ -17,6 +17,11 @@
             </div>
         </div>
         <div class="container-fluid">
+            @if('error')
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
             <div class="container-flat-form">
                 <div class="title-flat-form title-flat-blue">Nueva Reserva</div>
                 <form method="POST" action="{{route('reserva.store')}}" class="form-padding">

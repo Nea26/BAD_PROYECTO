@@ -88,21 +88,20 @@
                                     <tbody>
                                         <tr>
                                             <td>Miembro con mayor prestamos realizados</td>
-                                            <td>{{ $mayorPrestamoMiembro->total_prestamos }}</td>
-                                            <td>{{ explode(' ', $mayorPrestamoMiembro->nombre)[0] }}
-                                                {{ explode(' ', $mayorPrestamoMiembro->apellido)[0] }}</td>
+                                            <td>{{ $mayorPrestamoMiembro ? $mayorPrestamoMiembro->total_prestamos : 'N/A' }}</td>
+                                            <td>{{ $mayorPrestamoMiembro ? explode(' ', $mayorPrestamoMiembro->nombre)[0] . ' ' . explode(' ', $mayorPrestamoMiembro->apellido)[0] : 'N/A' }}</td>
                                         </tr>
-
+                                        
                                         <tr>
                                             <td>Profesor con mayor prestamos realizados</td>
-                                            <td>{{ $mayorPrestamoProfesor->total_prestamos }}</td>
-                                            <td>{{ explode(' ', $mayorPrestamoProfesor->nombre)[0] }}
-                                                {{ explode(' ', $mayorPrestamoProfesor->apellido)[0] }}</td>
+                                            <td>{{ $mayorPrestamoProfesor ? $mayorPrestamoProfesor->total_prestamos : 'N/A' }}</td>
+                                            <td>{{ $mayorPrestamoProfesor ? explode(' ', $mayorPrestamoProfesor->nombre)[0] . ' ' . explode(' ', $mayorPrestamoProfesor->apellido)[0] : 'N/A' }}</td>
                                         </tr>
+                                        
                                         <tr>
                                             <td>Libro más prestado</td>
-                                            <td>{{ $libroMasPrestado->total_prestamos }}</td>
-                                            <td>{{ $libroMasPrestado->titulo }}</td>
+                                            <td>{{ $libroMasPrestado ? $libroMasPrestado->total_prestamos : 'N/A' }}</td>
+                                            <td>{{ $libroMasPrestado ? $libroMasPrestado->titulo : 'N/A' }}</td>
                                         </tr>
                                     </tbody>
 

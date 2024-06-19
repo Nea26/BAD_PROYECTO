@@ -28,56 +28,62 @@ class ReservaController extends Controller
     {
         return view('CrearReserva');
     }
+    
     public function store(Request $request){
-        $prestamo = new PrestamoMiembro();
-        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
-        $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();
-        $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
-        if($Libros!=null && $Miembro!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->id_user =$Miembro->user_id; 
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->aprobado=0;
-            $prestamo->save();
-            return redirect()->route('reserva.index');
-
-        }elseif($Libros!=null && $Profesor!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->id_user =$Profesor->user_id;
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->aprobado=0;
-            $prestamo->save();
-            return redirect()->route('reserva.index');
-        }else{
-            return redirect()->route('reserva.create',["error" => 'No se encontro el libro con el codigo ingresado']);
+        $Libros = DB::table("libros")->where("codigo_internacional", $request->codigo)->first();
+        if ($Libros == null) {
+            return redirect()->route('reserva.create')->with('error', 'No se encontró el libro con el código ingresado');
         }
-
+    
+        $Miembro = DB::table("miembro")->where("CARNET_MIEMBRO", $request->carnet)->first();
+        $Profesor = DB::table("profesor")->where("CARNET_PROFESOR", $request->carnet)->first();
+        if ($Miembro == null && $Profesor == null) {
+            return redirect()->route('reserva.create')->with('error', 'No se encontró el miembro o profesor con el carnet ingresado');
+        }
+    
+        $prestamo = new PrestamoMiembro();
+        $prestamo->id_ejemplar = $Libros->id;
+        $prestamo->carnet_miembro = $request->carnet;
+        $prestamo->aprobado = 0;
+    
+        if ($Miembro != null) {
+            $prestamo->id_user = $Miembro->user_id;
+        } elseif ($Profesor != null) {
+            $prestamo->id_user = $Profesor->user_id;
+        }
+    
+        $prestamo->save();
+        return redirect()->route('reserva.index');
     }
+
+    
     public function edit(PrestamoMiembro $prestamo)
     {
         return view('editarReserva',['prestamo' => $prestamo]);
     }
+    
     public function update(Request $request, PrestamoMiembro $prestamo)
     {
-        $Libros=DB::table("libros")->where("codigo_internacional",$request->codigo)->first();
-        $Miembro=DB::table("miembro")->where("CARNET_MIEMBRO",$request->carnet)->first();  
-        $Profesor=DB::table("profesor")->where("CARNET_PROFESOR",$request->carnet)->first();
-        if($Libros!=null && $Miembro!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->id_user =$Miembro->user_id;
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->save();
-            return redirect()->route('reserva.index');
-        }elseif($Libros!=null && $Profesor!=null){
-            $prestamo->id_ejemplar = $Libros->id;
-            $prestamo->id_user =$Profesor->user_id;
-            $prestamo->carnet_miembro = $request->carnet;
-            $prestamo->save();
-            return redirect()->route('reserva.index');
-        }else{
-            return redirect()->route('reserva.edit',['prestamo'=>$prestamo,"error" => 'No se encontro el libro con el codigo ingresado']);
+        $Libros = DB::table("libros")->where("codigo_internacional", $request->codigo)->first();
+        $Miembro = DB::table("miembro")->where("CARNET_MIEMBRO", $request->carnet)->first();
+        $Profesor = DB::table("profesor")->where("CARNET_PROFESOR", $request->carnet)->first();
+    
+        if (!$Libros) {
+            return redirect()->route('reserva.edit', ['prestamo' => $prestamo])->with('error', 'No se encontró el libro con el código proporcionado.');
         }
-
+    
+        if (!$Miembro && !$Profesor) {
+            return redirect()->route('reserva.edit', ['prestamo' => $prestamo])->with('error', 'No se encontró un miembro o profesor con el carnet proporcionado.');
+        }
+    
+        $prestamo->id_ejemplar = $Libros->id;
+        $prestamo->carnet_miembro = $request->carnet;
+        // Asignar id_user basado en si es miembro o profesor
+        $prestamo->id_user = $Miembro ? $Miembro->user_id : $Profesor->user_id;
+    
+        $prestamo->save();
+    
+        return redirect()->route('reserva.index')->with('success', 'Reserva actualizada con éxito.');
     }
     public function destroy(PrestamoMiembro $prestamo)
     {

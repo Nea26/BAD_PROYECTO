@@ -47,8 +47,11 @@
             ],
             datasets: [{
                 label: 'Número de Préstamos',
-                data: [{{ $mayorPrestamoMiembro->total_prestamos }}, {{ $mayorPrestamoProfesor->total_prestamos }}, {{ $libroMasPrestado->total_prestamos }}],
-                backgroundColor: [
+                data: [
+                    {{ $mayorPrestamoMiembro->total_prestamos ?? '0' }}, 
+                    {{ $mayorPrestamoProfesor->total_prestamos ?? '0' }}, 
+                    {{ $libroMasPrestado->total_prestamos ?? '0' }}
+                ],                backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
                     'rgba(255, 206, 86, 0.2)'
@@ -83,9 +86,9 @@
 
                             // Datos adicionales para mostrar en los tooltips
                             var additionalData = [
-                                'Miembro con más préstamos: {{explode(" ", $mayorPrestamoMiembro->nombre)[0] }} {{explode(" ", $mayorPrestamoMiembro->apellido)[0]}}',
-                                'Profesor con más préstamos: {{ explode(' ', $mayorPrestamoProfesor->nombre)[0] }} {{ explode(' ', $mayorPrestamoProfesor->apellido)[0] }}',
-                                'Libro más prestado: {{ $libroMasPrestado->titulo }}'
+                                'Miembro con más préstamos: {{ explode(" ", $mayorPrestamoMiembro->nombre ?? '')[0] ?? "N/A" }} {{ explode(" ", $mayorPrestamoMiembro->apellido ?? '')[0] ?? "N/A" }}',
+                                'Profesor con más préstamos: {{ explode(" ", $mayorPrestamoProfesor->nombre ?? '')[0] ?? "N/A" }} {{ explode(" ", $mayorPrestamoProfesor->apellido ?? '')[0] ?? "N/A" }}',
+                                'Libro más prestado: {{ $libroMasPrestado->titulo ?? "N/A" }}'
                             ];
 
                             // Crea el tooltip con los datos adicionales

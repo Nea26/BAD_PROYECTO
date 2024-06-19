@@ -40,7 +40,7 @@ class ReporteController extends Controller
             //Libro mas prestado
             $libroMasPrestado = DB::table('prestamo_miembros')
             ->select('libros.titulo', DB::raw('count(*) as total_prestamos'))
-            ->join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.codigo_internacional')
+            ->join('libros', 'prestamo_miembros.id_ejemplar', '=', 'libros.id')
             ->groupBy('libros.titulo')
             ->orderBy('total_prestamos', 'desc')
             ->first();    
